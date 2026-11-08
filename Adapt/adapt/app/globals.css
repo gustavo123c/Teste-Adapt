@@ -1,0 +1,184 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+  font-family: sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* TEMA 01 - Modo Claro */
+:root {
+  --color-bg: #ffffff;
+  --color-header: #ffffff;
+  --color-primary: #fa6413; /* cor principal */
+  --color-primary-hover: #ff9955; /* cor de destaque */
+  --color-text: #0e0e0e; /* texto padrão */
+  --color-title: #5d3106; /* títulos e cabeçalhos */
+  --color-accent: #cc4700; /* botões secundários */
+  --color-border: #dddddd; /* bordas sutis */
+  --color-card: #b94b1a; /* cor do card*/
+  --footer-height: 72px;
+}
+
+/* TEMA 02 - Modo Escuro */
+.dark {
+  --color-bg: #0f0e0e;
+  --color-header: #1d1d1d;
+  --color-primary: #fa6413;
+  --color-primary-hover: #d54b00;
+  --color-text: #fcfcfc;
+  --color-title: #f4f4f4;
+  --color-accent: #a73a00;
+  --color-border: #333333;
+}
+
+/* BASE (HTML, BODY, LINKS) */
+html,
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* garante espaço para o footer fixo (visível o tempo todo) */
+body {
+  padding-bottom: var(--footer-height);
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+.header {
+  width: 100%;
+  background-color: var(--color-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 48px;
+  background: var(--color-header); /*Testando modo dark*/
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: auto;
+  width: 130px;
+  object-fit: contain;
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 36px;
+}
+
+.navList a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.navList a:hover {
+  color: #ff6a00;
+}
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.btnOutline {
+  border: 2px solid #ff6a00;
+  color: #ff6a00;
+  font-weight: 800;
+  padding: 8px 18px;
+  border-radius: 30px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.btnOutline:hover {
+  background-color: #ff6a00;
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(255, 106, 0, 0.4);
+}
+
+.btnPrimary {
+  background-color: #ff6a00;
+  border: 2px solid #ff6a00;
+  color: #fff;
+  font-weight: 800;
+  padding: 8px 18px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.btnPrimary:hover {
+  background-color: #e25800;
+  border-color: #e25800;
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(255, 106, 0, 0.4);
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .navList {
+    gap: 18px;
+  }
+
+  .btnPrimary,
+  .btnOutline {
+    padding: 10px 24px;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

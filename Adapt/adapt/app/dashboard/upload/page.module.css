@@ -1,0 +1,366 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: "Inter", sans-serif;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #f97316;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto; /* Centraliza */
+}
+
+.uploadArea {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 1.2rem;
+  border: 2px dashed #fb923c;
+  color: #f97316;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.uploadArea:hover {
+  border-color: #f97316;
+  background: #fff7ed;
+  transform: scale(1.02);
+}
+
+.loadingText {
+  margin-top: 1rem;
+  color: #ea580c;
+  font-weight: 600;
+}
+
+/* Mantém os cards bonitos abaixo */
+.right > * {
+  background: #ffffff;
+  padding: 1.7rem;
+  border-radius: 1rem;
+  border: 1px solid #ffe2cc;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  margin-bottom: 1.5rem;
+  margin-top: 2px;
+}
+
+.btnPrimary {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #f97316;
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnPrimary:hover {
+  background: #ea580c;
+  transform: scale(1.03);
+}
+
+.btnPrimary:disabled {
+  background: #fcd9b6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.actionsBottom {
+  margin-top: 2rem;
+}
+
+.error {
+  background: #fee2e2;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 980px) {
+  .title {
+    font-size: 1.9rem;
+  }
+}

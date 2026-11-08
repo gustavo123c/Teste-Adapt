@@ -1,0 +1,117 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* alinhar itens ao topo para manter o card próximo ao topo da página */
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, #d76100, #ff7b0f, #ffc793, #ff7e15, #d76100);
+  background-size: 400% 400%;
+  animation: backgroundFade 15s ease infinite;
+  /* ajustar espaçamento superior — descer o card apenas mais um pouco */
+  padding-top: 60px;
+  width: 100%;
+  /* evita overflow com footer fixo: altura mínima considera o footer */
+  min-height: calc(100vh - var(--footer-height));
+}
+
+/* Anima gradualmente o gradiente */
+@keyframes backgroundFade {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 25%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 25%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Logo */
+.logo {
+  height: auto;
+  width: 350px;
+  /* ajuste leve no logo para ficar consistente com o novo espaçamento */
+  margin: -40px auto 28px auto;
+}
+
+/* Card */
+.card {
+  background-color: var(--color-card);
+  padding: 40px 50px;
+  border-radius: 14px;
+  width: 420px;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  /* margem inferior levemente maior para equilibrar o deslocamento */
+  margin-bottom: 36px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+/* Formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.form label {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.form input {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+}
+
+.submitBtn {
+  margin-top: 10px;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #e85b2a;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submitBtn:hover {
+  background-color: #f2763b;
+}
+
+.error {
+  color: #ffdddd;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Link Criar Conta */
+.signUpLink {
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.signUpLink a {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: underline;
+}

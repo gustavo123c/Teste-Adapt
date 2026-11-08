@@ -1,0 +1,32 @@
+/* === FOOTER === */
+.footer {
+  position: static; /* ou simplesmente remover position */
+  margin-top: auto;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px 0;
+  min-height: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  background: var(--color-bg, #fff);
+  box-shadow: 0 -6px 18px rgba(0,0,0,0.06);
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer nav a {
+  color: #444;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 600;
+}
+
+.footer nav a:hover {
+  color: #ff6a00;
+}

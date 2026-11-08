@@ -1,0 +1,46 @@
+{
+  "name": "adapt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "jest --watchAll"
+  },
+  "dependencies": {
+    "cohere-ai": "^7.19.0",
+    "file-type": "^21.0.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.3",
+    "lucide-react": "^0.545.0",
+    "mammoth": "^1.11.0",
+    "next": "15.5.4",
+    "node-fetch": "^3.3.2",
+    "openai": "^6.7.0",
+    "parse": "^6.1.1",
+    "pdf-lib": "^1.17.1",
+    "pdf-parse": "^2.4.5",
+    "pdf2json": "^4.0.0",
+    "pdfjs-dist": "^5.4.394",
+    "pdfkit": "^0.17.2",
+    "pdfmake": "^0.2.20",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-markdown": "^10.1.0",
+    "stream-buffers": "^3.0.3",
+    "tesseract.js": "^6.0.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.4",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "identity-obj-proxy": "^3.0.0"
+  }
+}
