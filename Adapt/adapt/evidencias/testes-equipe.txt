@@ -1,0 +1,126 @@
+  console.error
+    Error: Could not find file in options
+        at Object.openZip (/workspaces/Teste-Adapt/Adapt/adapt/node_modules/mammoth/lib/unzip.js:18:32)
+        at Object.extractRawText (/workspaces/Teste-Adapt/Adapt/adapt/node_modules/mammoth/lib/index.js:82:18)
+        at extractRawText (/workspaces/Teste-Adapt/Adapt/adapt/app/api/parse-docx/route.js:15:34)
+        at Object.<anonymous> (/workspaces/Teste-Adapt/Adapt/adapt/__tests__/qa/parseApi.integration.test.js:26:17)
+
+      20 |     });
+      21 |   } catch (err) {
+    > 22 |     console.error(err);
+         |             ^
+      23 |     return new Response(JSON.stringify({ error: err.message }), {
+      24 |       status: 500,
+      25 |       headers: { "Content-Type": "application/json" },
+
+      at error (app/api/parse-docx/route.js:22:13)
+      at Object.<anonymous> (__tests__/qa/parseApi.integration.test.js:26:17)
+
+FAIL __tests__/qa/parseApi.integration.test.js
+  Integracao: /api/parse-docx
+    ✕ CT-I05 extrai o texto de um .docx real (49 ms)
+    ✓ CT-I06 retorna 400 quando nenhum arquivo e enviado (3 ms)
+  Integracao: /api/parse-file
+    ✓ CT-I07 detecta 2 questoes numeradas em um .docx real (71 ms)
+    ✓ CT-I08 retorna 400 'Nenhuma questao detectada' para .docx sem numeracao (44 ms)
+    ✓ CT-I09 rejeita formato nao suportado (text/plain) com 400 (2 ms)
+    ✕ CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500) (4 ms)
+    ✓ CT-I11 GET informa que a API esta operacional (2 ms)
+
+  ● Integracao: /api/parse-docx › CT-I05 extrai o texto de um .docx real
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 500
+
+      26 |     const res = await parseDocx(reqWith("http://localhost/api/parse-docx", makeDocxFile(PROVA_DOCX_B64)));
+      27 |     const body = await res.json();
+    > 28 |     expect(res.status).toBe(200);
+         |                        ^
+      29 |     expect(body.text).toContain("Quanto é 2 + 2");
+      30 |     expect(body.text).toContain("capital do Brasil");
+      31 |   });
+
+      at Object.toBe (__tests__/qa/parseApi.integration.test.js:28:24)
+
+  ● Integracao: /api/parse-file › CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500)
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 500
+
+      69 |   test("CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500)", async () => {
+      70 |     const res = await parseFile(reqWith("http://localhost/api/parse-file", null));
+    > 71 |     expect(res.status).toBe(400);
+         |                        ^
+      72 |   });
+      73 |
+      74 |   test("CT-I11 GET informa que a API esta operacional", async () => {
+
+      at Object.toBe (__tests__/qa/parseApi.integration.test.js:71:24)
+
+FAIL __tests__/qa/downloadUtils.unit.test.js
+  gerarPDFAdaptado (unitario)
+    ✓ CT-U04 lanca erro quando nao ha provaId (6 ms)
+    ✓ CT-U04b lanca erro quando nao ha adaptedData (1 ms)
+    ✓ CT-U05 lanca erro quando a prova nao tem URL do arquivo original (1 ms)
+    ✓ CT-U06 lanca erro quando a lista de questoes adaptadas esta vazia
+    ✓ CT-U10 usa o formato alternativo questoes[].adaptada quando nao ha adaptedQuestions (1 ms)
+    ✓ CT-U11 lanca 'Erro ao gerar PDF.' quando a API responde com falha
+    ✓ CT-U12 nomeia o arquivo com base no arquivo selecionado
+    ✕ CT-U13 nome padrao (sem arquivo selecionado) deveria ser 'prova_adaptada.pdf' (3 ms)
+
+  ● gerarPDFAdaptado (unitario) › CT-U13 nome padrao (sem arquivo selecionado) deveria ser 'prova_adaptada.pdf'
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "prova_adaptada.pdf"
+    Received: "prova_adaptada_adaptada.pdf"
+
+      103 |       adaptedData: { adaptedQuestions: ["Q1"] },
+      104 |     });
+    > 105 |     expect(safeName).toBe("prova_adaptada.pdf");
+          |                      ^
+      106 |   });
+      107 | });
+      108 |
+
+      at Object.toBe (__tests__/qa/downloadUtils.unit.test.js:105:22)
+
+PASS __tests__/qa/provas.integration.test.js
+  Integracao: upload -> adaptacao -> listagem -> exclusao
+    ✓ CT-I01 gerarPDFAdaptado integra Parse + /api/generate-pdf e grava o PDF adaptado na prova (2 ms)
+    ✓ CT-I02 getProvasUser so lista provas que ja possuem arquivo adaptado (1 ms)
+    ✓ CT-I03 provas de outro usuario nao aparecem na listagem (1 ms)
+    ✓ CT-I04 deleteProva remove a prova e ela some da listagem (10 ms)
+
+PASS __tests__/qa/parseFile.unit.test.js
+  POST /api/parse-file (unitario, mammoth mockado)
+    ✓ CT-U16 retorna 400 quando o texto extraido e curto demais (2 ms)
+    ✓ CT-U17 extrai questoes numeradas com ids q1, q2 (2 ms)
+    ✓ CT-U18 ignora itens numerados muito curtos (<= 10 caracteres) (4 ms)
+    ✓ CT-U19 remove a linha de cabecalho 'Instrucoes:' antes de extrair (1 ms)
+    ✓ CT-U20 GET retorna mensagem de API operacional
+
+PASS __tests__/qa/provasService.unit.test.js
+  getProvasUser (unitario)
+    ✓ CT-U07 lanca erro quando nao ha usuario autenticado (6 ms)
+    ✓ CT-U14 filtra por usuario e mapeia os campos retornados (3 ms)
+  deleteProva (unitario)
+    ✓ CT-U08 busca a prova pelo id, chama destroy e retorna true (1 ms)
+    ✓ CT-U15 propaga o erro quando a prova nao existe (1 ms)
+
+PASS __tests__/qa/uploadFile.unit.test.js
+  uploadFile (unitario)
+    ✓ CT-U01 remove acentos e troca espacos por underscore no nome (2 ms)
+    ✓ CT-U02 troca caracteres especiais por underscore e preserva a extensao (1 ms)
+    ✓ CT-U03 propaga o erro e exibe alert quando o save do arquivo falha (7 ms)
+    ✓ CT-U09 retorna o id da prova criada e grava titulo e url original (1 ms)
+
+Test Suites: 2 failed, 4 passed, 6 total
+Tests:       3 failed, 29 passed, 32 total
+Snapshots:   0 total
+Time:        1.837 s, estimated 2 s
+Ran all test suites matching __tests__/qa.
