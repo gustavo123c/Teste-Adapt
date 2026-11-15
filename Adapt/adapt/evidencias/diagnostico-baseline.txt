@@ -1,0 +1,13 @@
+PASS __tests__/qa/baselineDiagnostico.unit.test.jsx
+  Diagnostico DEF-01 a DEF-04 (UploadPage.download.test.jsx)
+    ✓ CT-U21: uploadFile falha quando save() devolve true, como no mock dos autores (21 ms)
+    ✓ CT-U22: uploadFile funciona quando save() devolve o proprio arquivo (comportamento real do Parse) (2 ms)
+  Diagnostico DEF-05 (SalvasPage.test.jsx)
+    ✓ CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista (40 ms)
+    ✓ CT-U24: prova com arquivoAdaptadoUrl aparece na lista (24 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        0.524 s, estimated 1 s
+Ran all test suites matching __tests__/qa/baselineDiagnostico.unit.test.jsx.
