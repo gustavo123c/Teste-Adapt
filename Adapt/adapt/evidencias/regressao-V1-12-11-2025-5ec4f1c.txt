@@ -1,0 +1,331 @@
+# Regressao - suite da equipe (__tests__/qa)
+# Commit: 5ec4f1c2825f9ad8b9563ae6346967ac62d40804
+# Data do commit: 2025-11-12 Baixando
+# Executado em: 18/11/2026 15:24 | node v22.23.5 | npm 10.9.9
+# Comando: npx jest --watchAll=false --verbose __tests__/qa
+
+FAIL __tests__/qa/provas.integration.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../app/dashboard/upload/downloadUtils' from '__tests__/qa/provas.integration.test.js'
+
+      15 |   default: require("../../test-utils/fakeParse").Parse,
+      16 | }));
+    > 17 |
+         | ^
+      18 | describe("Integracao: upload -> adaptacao -> listagem -> exclusao", () => {
+      19 |   beforeEach(() => {
+      20 |     reset();
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:863:11)
+      at Object.<anonymous> (__tests__/qa/provas.integration.test.js:17:24)
+
+FAIL __tests__/qa/downloadUtils.unit.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../app/dashboard/upload/downloadUtils' from '__tests__/qa/downloadUtils.unit.test.js'
+
+      21 |   },
+      22 | }));
+    > 23 |
+         | ^
+      24 | function makeProva(url = "https://fake/original.pdf") {
+      25 |   return {
+      26 |     get: jest.fn((k) => (k === "arquivoOriginalUrl" ? url : undefined)),
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:863:11)
+      at Object.<anonymous> (__tests__/qa/downloadUtils.unit.test.js:23:24)
+
+FAIL __tests__/qa/baselineDiagnostico.unit.test.jsx
+  Diagnostico DEF-01 a DEF-04 (UploadPage.download.test.jsx)
+    ✓ CT-U21: uploadFile falha quando save() devolve true, como no mock dos autores (9 ms)
+    ✓ CT-U22: uploadFile funciona quando save() devolve o proprio arquivo (comportamento real do Parse) (8 ms)
+  Diagnostico DEF-05 (SalvasPage.test.jsx)
+    ✕ CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista (1021 ms)
+    ✓ CT-U24: prova com arquivoAdaptadoUrl aparece na lista (19 ms)
+
+  ● Diagnostico DEF-05 (SalvasPage.test.jsx) › CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista
+
+    Unable to find an element with the text: Você ainda não possui provas salvas.. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+    Ignored nodes: comments, script, style
+    [36m<body>[39m
+      [36m<div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"main"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"header"[39m
+          [36m>[39m
+            [36m<h1>[39m
+              [0mProvas Salvas[0m
+            [36m</h1>[39m
+            [36m<p>[39m
+              [0mGerencie suas provas adaptadas recentes.[0m
+            [36m</p>[39m
+          [36m</header>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"summary"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"summaryCard"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"summaryLabel"[39m
+              [36m>[39m
+                [0mTotal de Provas[0m
+              [36m</span>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"summaryValue"[39m
+              [36m>[39m
+                [0m1[0m
+              [36m</h2>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"summaryCard"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"summaryLabel"[39m
+              [36m>[39m
+                [0mÚltima Criada[0m
+              [36m</span>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"summaryValue"[39m
+              [36m>[39m
+                [0m31/12/2024[0m
+              [36m</h2>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"summaryCard"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"summaryLabel"[39m
+              [36m>[39m
+                [0mMais Recente[0m
+              [36m</span>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"summaryValue"[39m
+              [36m>[39m
+                [0mProva Teste[0m
+              [36m</h2>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"chartSection"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mProvas Criadas por Mês[0m
+            [36m</h2>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"chartContainer"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"barGroup"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"bar"[39m
+                  [33mstyle[39m=[32m"height: 140px;"[39m
+                [36m/>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"barLabel"[39m
+                [36m>[39m
+                  [0mdez.[0m
+                [36m</span>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"cardsGrid"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"card"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"cardIcon"[39m
+              [36m>[39m
+                [0m📄[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"cardBody"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mProva Teste[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"cardDate"[39m
+                [36m>[39m
+                  [0mEnviada em 31/12/2024[0m
+                [36m</p>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"cardActions"[39m
+                [36m>[39m
+                  [36m<a[39m
+                    [33mclass[39m=[32m"openBtn"[39m
+                    [33mhref[39m=[32m"https://fake/prova.pdf"[39m
+                    [33mrel[39m=[32m"noopener noreferrer"[39m
+                    [33mtarget[39m=[32m"_blank"[39m
+                  [36m>[39m
+                    [0mAbrir[0m
+                  [36m</a>[39m
+                  [36m<a[39m
+                    [33mclass[39m=[32m"downloadBtn"[39m
+                    [33mdownload[39m=[32m""[39m
+                    [33mhref[39m=[32m"https://fake/prova.pdf"[39m
+                  [36m>[39m
+                    [0mBaixar[0m
+                  [36m</a>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"deleteBtn"[39m
+                  [36m>[39m
+                    [0mExcluir[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</body>[39m
+
+      76 |     render(<SalvasPage />);
+      77 |
+    > 78 |     expect(await screen.findByText("Você ainda não possui provas salvas.")).toBeInTheDocument();
+         |                         ^
+      79 |     expect(screen.queryByText("Prova Teste")).not.toBeInTheDocument();
+      80 |   });
+      81 |
+
+      at waitForWrapper (node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+      at node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+      at Object.findByText (__tests__/qa/baselineDiagnostico.unit.test.jsx:78:25)
+
+  console.error
+    Error: Could not find file in options
+        at Object.openZip (/home/claude/regressao/5ec4f1c/adapt/node_modules/mammoth/lib/unzip.js:18:32)
+        at Object.extractRawText (/home/claude/regressao/5ec4f1c/adapt/node_modules/mammoth/lib/index.js:82:18)
+        at extractRawText (/home/claude/regressao/5ec4f1c/adapt/app/api/parse-docx/route.js:15:34)
+        at Object.<anonymous> (/home/claude/regressao/5ec4f1c/adapt/__tests__/qa/parseApi.integration.test.js:26:17)
+
+      20 |     });
+      21 |   } catch (err) {
+    > 22 |     console.error(err);
+         |             ^
+      23 |     return new Response(JSON.stringify({ error: err.message }), {
+      24 |       status: 500,
+      25 |       headers: { "Content-Type": "application/json" },
+
+      at error (app/api/parse-docx/route.js:22:13)
+      at Object.<anonymous> (__tests__/qa/parseApi.integration.test.js:26:17)
+
+FAIL __tests__/qa/parseApi.integration.test.js
+  Integracao: /api/parse-docx
+    ✕ CT-I05 extrai o texto de um .docx real (25 ms)
+    ✓ CT-I06 retorna 400 quando nenhum arquivo e enviado (1 ms)
+  Integracao: /api/parse-file
+    ✓ CT-I07 detecta 2 questoes numeradas em um .docx real (15 ms)
+    ✓ CT-I08 retorna 400 'Nenhuma questao detectada' para .docx sem numeracao (3 ms)
+    ✓ CT-I09 rejeita formato nao suportado (text/plain) com 400 (1 ms)
+    ✕ CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500) (1 ms)
+    ✓ CT-I11 GET informa que a API esta operacional (1 ms)
+
+  ● Integracao: /api/parse-docx › CT-I05 extrai o texto de um .docx real
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 500
+
+      26 |     const res = await parseDocx(reqWith("http://localhost/api/parse-docx", makeDocxFile(PROVA_DOCX_B64)));
+      27 |     const body = await res.json();
+    > 28 |     expect(res.status).toBe(200);
+         |                        ^
+      29 |     expect(body.text).toContain("Quanto é 2 + 2");
+      30 |     expect(body.text).toContain("capital do Brasil");
+      31 |   });
+
+      at Object.toBe (__tests__/qa/parseApi.integration.test.js:28:24)
+
+  ● Integracao: /api/parse-file › CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500)
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 500
+
+      69 |   test("CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500)", async () => {
+      70 |     const res = await parseFile(reqWith("http://localhost/api/parse-file", null));
+    > 71 |     expect(res.status).toBe(400);
+         |                        ^
+      72 |   });
+      73 |
+      74 |   test("CT-I11 GET informa que a API esta operacional", async () => {
+
+      at Object.toBe (__tests__/qa/parseApi.integration.test.js:71:24)
+
+FAIL __tests__/qa/provasService.unit.test.js
+  getProvasUser (unitario)
+    ✓ CT-U07 lanca erro quando nao ha usuario autenticado (3 ms)
+    ✕ CT-U14 filtra por usuario e mapeia os campos retornados (1 ms)
+  deleteProva (unitario)
+    ✓ CT-U08 busca a prova pelo id, chama destroy e retorna true (1 ms)
+    ✓ CT-U15 propaga o erro quando a prova nao existe
+
+  ● getProvasUser (unitario) › CT-U14 filtra por usuario e mapeia os campos retornados
+
+    TypeError: p.get(...)?.name is not a function
+
+      18 |     criadoEm: p.createdAt,
+      19 |     arquivoUrl: p.get("arquivoOriginal")?.url() || null,
+    > 20 |     arquivoName: p.get("arquivoOriginal")?.name() || null,
+         |                                            ^
+      21 |   }));
+      22 | }
+      23 |
+
+      at name (app/back4app/provas/getProvasUser.js:20:44)
+          at Array.map (<anonymous>)
+      at map (app/back4app/provas/getProvasUser.js:15:18)
+      at Object.<anonymous> (__tests__/qa/provasService.unit.test.js:56:20)
+
+PASS __tests__/qa/parseFile.unit.test.js
+  POST /api/parse-file (unitario, mammoth mockado)
+    ✓ CT-U16 retorna 400 quando o texto extraido e curto demais (1 ms)
+    ✓ CT-U17 extrai questoes numeradas com ids q1, q2 (1 ms)
+    ✓ CT-U18 ignora itens numerados muito curtos (<= 10 caracteres) (2 ms)
+    ✓ CT-U19 remove a linha de cabecalho 'Instrucoes:' antes de extrair (1 ms)
+    ✓ CT-U20 GET retorna mensagem de API operacional (1 ms)
+
+FAIL __tests__/qa/uploadFile.unit.test.js
+  uploadFile (unitario)
+    ✓ CT-U01 remove acentos e troca espacos por underscore no nome (2 ms)
+    ✓ CT-U02 troca caracteres especiais por underscore e preserva a extensao (1 ms)
+    ✓ CT-U03 propaga o erro e exibe alert quando o save do arquivo falha (1 ms)
+    ✕ CT-U09 retorna o id da prova criada e grava titulo e url original (1 ms)
+
+  ● uploadFile (unitario) › CT-U09 retorna o id da prova criada e grava titulo e url original
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: "titulo", "relatorio_final.pdf"
+    Received
+           1: "arquivoOriginal", {"url": [Function url]}
+           2: "arquivoOriginalUrl", "https://fake/arquivo.pdf"
+           3: "usuario", {"id": "u1"}
+
+    Number of calls: 3
+
+      58 |     const id = await uploadFile(new File(["x"], "relatório final.pdf"));
+      59 |     expect(id).toBe("prova123");
+    > 60 |     expect(mockProvaSet).toHaveBeenCalledWith("titulo", "relatorio_final.pdf");
+         |                          ^
+      61 |     expect(mockProvaSet).toHaveBeenCalledWith("arquivoOriginalUrl", "https://fake/arquivo.pdf");
+      62 |   });
+      63 | });
+
+      at Object.toHaveBeenCalledWith (__tests__/qa/uploadFile.unit.test.js:60:26)
+
+Test Suites: 6 failed, 1 passed, 7 total
+Tests:       5 failed, 19 passed, 24 total
+Snapshots:   0 total
+Time:        2.117 s
+Ran all test suites matching __tests__/qa.

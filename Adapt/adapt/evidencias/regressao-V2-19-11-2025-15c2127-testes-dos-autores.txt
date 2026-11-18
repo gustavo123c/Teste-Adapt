@@ -1,0 +1,752 @@
+# Regressao - suite pre-existente dos autores (sem __tests__/qa)
+# Commit: 15c2127074c48f8d685a60d9a477cceb66aa8820
+# Executado em: 18/11/2026 15:25 | node v22.23.5 | npm 10.9.9
+# Comando: npx jest --watchAll=false --verbose --testPathIgnorePatterns=__tests__/qa
+
+  console.log
+    Iniciando upload: arquivo.pdf
+
+      at log (app/back4app/provas/uploadFile.js:5:13)
+
+  console.log
+    Nome sanitizado: arquivo.pdf
+
+      at log (app/back4app/provas/uploadFile.js:12:13)
+
+  console.error
+    Erro ao fazer upload: TypeError: savedFile.url is not a function
+        at url (/home/claude/regressao/15c2127/adapt/app/back4app/provas/uploadFile.js:17:54)
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:57:29)
+
+      29 |     return result.id; // devolve o ID da prova criada
+      30 |   } catch (error) {
+    > 31 |     console.error("Erro ao fazer upload:", error);
+         |             ^
+      32 |     alert("Erro: " + error.message);
+      33 |     throw error;
+      34 |   }
+
+      at error (app/back4app/provas/uploadFile.js:31:13)
+      at handleFileSelect (app/dashboard/upload/page.js:57:29)
+
+  console.error
+    ❌ Erro no upload: TypeError: savedFile.url is not a function
+        at url (/home/claude/regressao/15c2127/adapt/app/back4app/provas/uploadFile.js:17:54)
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:57:29)
+
+      58 |       setProvaId(provaIdCriado);
+      59 |     } catch (err) {
+    > 60 |       console.error("❌ Erro no upload:", err);
+         |               ^
+      61 |       setError(err.message);
+      62 |     } finally {
+      63 |       setUploading(false);
+
+      at error (app/dashboard/upload/page.js:60:15)
+
+  console.log
+    Iniciando upload: arquivo.pdf
+
+      at log (app/back4app/provas/uploadFile.js:5:13)
+
+  console.log
+    Nome sanitizado: arquivo.pdf
+
+      at log (app/back4app/provas/uploadFile.js:12:13)
+
+  console.error
+    Erro ao fazer upload: TypeError: savedFile.url is not a function
+        at url (/home/claude/regressao/15c2127/adapt/app/back4app/provas/uploadFile.js:17:54)
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:57:29)
+
+      29 |     return result.id; // devolve o ID da prova criada
+      30 |   } catch (error) {
+    > 31 |     console.error("Erro ao fazer upload:", error);
+         |             ^
+      32 |     alert("Erro: " + error.message);
+      33 |     throw error;
+      34 |   }
+
+      at error (app/back4app/provas/uploadFile.js:31:13)
+      at handleFileSelect (app/dashboard/upload/page.js:57:29)
+
+  console.error
+    ❌ Erro no upload: TypeError: savedFile.url is not a function
+        at url (/home/claude/regressao/15c2127/adapt/app/back4app/provas/uploadFile.js:17:54)
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:57:29)
+
+      58 |       setProvaId(provaIdCriado);
+      59 |     } catch (err) {
+    > 60 |       console.error("❌ Erro no upload:", err);
+         |               ^
+      61 |       setError(err.message);
+      62 |     } finally {
+      63 |       setUploading(false);
+
+      at error (app/dashboard/upload/page.js:60:15)
+
+  console.log
+    Iniciando upload: arquivo.pdf
+
+      at log (app/back4app/provas/uploadFile.js:5:13)
+
+  console.log
+    Nome sanitizado: arquivo.pdf
+
+      at log (app/back4app/provas/uploadFile.js:12:13)
+
+  console.error
+    Erro ao fazer upload: TypeError: savedFile.url is not a function
+        at url (/home/claude/regressao/15c2127/adapt/app/back4app/provas/uploadFile.js:17:54)
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:57:29)
+
+      29 |     return result.id; // devolve o ID da prova criada
+      30 |   } catch (error) {
+    > 31 |     console.error("Erro ao fazer upload:", error);
+         |             ^
+      32 |     alert("Erro: " + error.message);
+      33 |     throw error;
+      34 |   }
+
+      at error (app/back4app/provas/uploadFile.js:31:13)
+      at handleFileSelect (app/dashboard/upload/page.js:57:29)
+
+  console.error
+    ❌ Erro no upload: TypeError: savedFile.url is not a function
+        at url (/home/claude/regressao/15c2127/adapt/app/back4app/provas/uploadFile.js:17:54)
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:57:29)
+
+      58 |       setProvaId(provaIdCriado);
+      59 |     } catch (err) {
+    > 60 |       console.error("❌ Erro no upload:", err);
+         |               ^
+      61 |       setError(err.message);
+      62 |     } finally {
+      63 |       setUploading(false);
+
+      at error (app/dashboard/upload/page.js:60:15)
+
+  console.log
+    Iniciando upload: arquivo.pdf
+
+      at log (app/back4app/provas/uploadFile.js:5:13)
+
+  console.log
+    Nome sanitizado: arquivo.pdf
+
+      at log (app/back4app/provas/uploadFile.js:12:13)
+
+  console.error
+    Erro ao fazer upload: TypeError: savedFile.url is not a function
+        at url (/home/claude/regressao/15c2127/adapt/app/back4app/provas/uploadFile.js:17:54)
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:57:29)
+
+      29 |     return result.id; // devolve o ID da prova criada
+      30 |   } catch (error) {
+    > 31 |     console.error("Erro ao fazer upload:", error);
+         |             ^
+      32 |     alert("Erro: " + error.message);
+      33 |     throw error;
+      34 |   }
+
+      at error (app/back4app/provas/uploadFile.js:31:13)
+      at handleFileSelect (app/dashboard/upload/page.js:57:29)
+
+  console.error
+    ❌ Erro no upload: TypeError: savedFile.url is not a function
+        at url (/home/claude/regressao/15c2127/adapt/app/back4app/provas/uploadFile.js:17:54)
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:57:29)
+
+      58 |       setProvaId(provaIdCriado);
+      59 |     } catch (err) {
+    > 60 |       console.error("❌ Erro no upload:", err);
+         |               ^
+      61 |       setError(err.message);
+      62 |     } finally {
+      63 |       setUploading(false);
+
+      at error (app/dashboard/upload/page.js:60:15)
+
+FAIL __tests__/UploadPage.download.test.jsx
+  UploadPage – Handle Download PDF
+    ✕ Fluxo de sucesso – gerar e baixar PDF adaptado (1038 ms)
+    ✕ Alerta quando arquivo original não encontrado (1011 ms)
+    ✕ Alerta quando nenhuma questão adaptada encontrada (1010 ms)
+    ✕ Erro ao gerar PDF (fetch.ok = false) (1013 ms)
+
+  ● UploadPage – Handle Download PDF › Fluxo de sucesso – gerar e baixar PDF adaptado
+
+    expect(jest.fn()).toHaveBeenCalled()
+
+    Expected number of calls: >= 1
+    Received number of calls:    0
+
+    Ignored nodes: comments, script, style
+    [36m<html>[39m
+      [36m<head />[39m
+      [36m<body>[39m
+        [36m<div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"container"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"title"[39m
+            [36m>[39m
+              [0mCriar Nova Prova Adaptada[0m
+            [36m</h2>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"error"[39m
+            [36m>[39m
+              [0m❌ [0m
+              [0msavedFile.url is not a function[0m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"grid"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"left"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mdata-testid[39m=[32m"mock-arquivo-carregado"[39m
+                [36m>[39m
+                  [0mArquivo carregado[0m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"right"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mdata-testid[39m=[32m"mock-adaptar"[39m
+                [36m>[39m
+                  [0mAdaptar[0m
+                [36m</button>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"actionsBottom"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"btnPrimary"[39m
+                  [36m>[39m
+                    [0mBaixar Prova Adaptada[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</body>[39m
+    [36m</html>[39m
+
+      108 |
+      109 |     await waitFor(() => {
+    > 110 |       expect(mockGet).toHaveBeenCalled();
+          |                       ^
+      111 |       expect(global.fetch).toHaveBeenCalledWith(
+      112 |         "/api/generate-pdf",
+      113 |         expect.objectContaining({
+
+      at toHaveBeenCalled (__tests__/UploadPage.download.test.jsx:110:23)
+      at runWithExpensiveErrorDiagnosticsDisabled (node_modules/@testing-library/dom/dist/config.js:47:12)
+      at checkCallback (node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+      at checkRealTimersCallback (node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+      at Timeout.task [as _onTimeout] (node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+
+  ● UploadPage – Handle Download PDF › Alerta quando arquivo original não encontrado
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: "URL do arquivo original não encontrada. Refaça o upload."
+    Received
+           1: "Erro: savedFile.url is not a function"
+           2: "Nenhuma adaptação gerada ainda. Aguarde o processamento."
+
+    Number of calls: 2
+
+    Ignored nodes: comments, script, style
+    [36m<html>[39m
+      [36m<head />[39m
+      [36m<body>[39m
+        [36m<div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"container"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"title"[39m
+            [36m>[39m
+              [0mCriar Nova Prova Adaptada[0m
+            [36m</h2>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"error"[39m
+            [36m>[39m
+              [0m❌ [0m
+              [0msavedFile.url is not a function[0m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"grid"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"left"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mdata-testid[39m=[32m"mock-arquivo-carregado"[39m
+                [36m>[39m
+                  [0mArquivo carregado[0m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"right"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mdata-testid[39m=[32m"mock-adaptar"[39m
+                [36m>[39m
+                  [0mAdaptar[0m
+                [36m</button>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"actionsBottom"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"btnPrimary"[39m
+                  [36m>[39m
+                    [0mBaixar Prova Adaptada[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</body>[39m
+    [36m</html>[39m
+
+      139 |
+      140 |     await waitFor(() => {
+    > 141 |       expect(window.alert).toHaveBeenCalledWith(
+          |                            ^
+      142 |         "URL do arquivo original não encontrada. Refaça o upload."
+      143 |       );
+      144 |     });
+
+      at toHaveBeenCalledWith (__tests__/UploadPage.download.test.jsx:141:28)
+      at runWithExpensiveErrorDiagnosticsDisabled (node_modules/@testing-library/dom/dist/config.js:47:12)
+      at checkCallback (node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+      at checkRealTimersCallback (node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+      at Timeout.task [as _onTimeout] (node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+
+  ● UploadPage – Handle Download PDF › Alerta quando nenhuma questão adaptada encontrada
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: StringContaining "Nenhuma questão adaptada encontrada"
+    Received
+           1: "Erro: savedFile.url is not a function"
+           2: "Nenhuma adaptação gerada ainda. Aguarde o processamento."
+
+    Number of calls: 2
+
+    Ignored nodes: comments, script, style
+    [36m<html>[39m
+      [36m<head />[39m
+      [36m<body>[39m
+        [36m<div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"container"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"title"[39m
+            [36m>[39m
+              [0mCriar Nova Prova Adaptada[0m
+            [36m</h2>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"error"[39m
+            [36m>[39m
+              [0m❌ [0m
+              [0msavedFile.url is not a function[0m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"grid"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"left"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mdata-testid[39m=[32m"mock-arquivo-carregado"[39m
+                [36m>[39m
+                  [0mArquivo carregado[0m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"right"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mdata-testid[39m=[32m"mock-adaptar"[39m
+                [36m>[39m
+                  [0mAdaptar[0m
+                [36m</button>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"actionsBottom"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"btnPrimary"[39m
+                  [36m>[39m
+                    [0mBaixar Prova Adaptada[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</body>[39m
+    [36m</html>[39m
+
+      156 |
+      157 |     await waitFor(() => {
+    > 158 |       expect(window.alert).toHaveBeenCalledWith(
+          |                            ^
+      159 |         expect.stringContaining("Nenhuma questão adaptada encontrada")
+      160 |       );
+      161 |     });
+
+      at toHaveBeenCalledWith (__tests__/UploadPage.download.test.jsx:158:28)
+      at runWithExpensiveErrorDiagnosticsDisabled (node_modules/@testing-library/dom/dist/config.js:47:12)
+      at checkCallback (node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+      at checkRealTimersCallback (node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+      at Timeout.task [as _onTimeout] (node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+
+  ● UploadPage – Handle Download PDF › Erro ao gerar PDF (fetch.ok = false)
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: "Erro ao gerar prova adaptada: Erro ao gerar PDF."
+    Received
+           1: "Erro: savedFile.url is not a function"
+           2: "Nenhuma adaptação gerada ainda. Aguarde o processamento."
+
+    Number of calls: 2
+
+    Ignored nodes: comments, script, style
+    [36m<html>[39m
+      [36m<head />[39m
+      [36m<body>[39m
+        [36m<div>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"container"[39m
+          [36m>[39m
+            [36m<h2[39m
+              [33mclass[39m=[32m"title"[39m
+            [36m>[39m
+              [0mCriar Nova Prova Adaptada[0m
+            [36m</h2>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"error"[39m
+            [36m>[39m
+              [0m❌ [0m
+              [0msavedFile.url is not a function[0m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"grid"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"left"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mdata-testid[39m=[32m"mock-arquivo-carregado"[39m
+                [36m>[39m
+                  [0mArquivo carregado[0m
+                [36m</div>[39m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"right"[39m
+              [36m>[39m
+                [36m<button[39m
+                  [33mdata-testid[39m=[32m"mock-adaptar"[39m
+                [36m>[39m
+                  [0mAdaptar[0m
+                [36m</button>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"actionsBottom"[39m
+                [36m>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"btnPrimary"[39m
+                  [36m>[39m
+                    [0mBaixar Prova Adaptada[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</body>[39m
+    [36m</html>[39m
+
+      183 |
+      184 |     await waitFor(() => {
+    > 185 |       expect(window.alert).toHaveBeenCalledWith(
+          |                            ^
+      186 |         "Erro ao gerar prova adaptada: Erro ao gerar PDF."
+      187 |       );
+      188 |     });
+
+      at toHaveBeenCalledWith (__tests__/UploadPage.download.test.jsx:185:28)
+      at runWithExpensiveErrorDiagnosticsDisabled (node_modules/@testing-library/dom/dist/config.js:47:12)
+      at checkCallback (node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+      at checkRealTimersCallback (node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+      at Timeout.task [as _onTimeout] (node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+
+  console.error
+    ❌ Erro no upload: Error: Erro ao processar arquivo.
+        at handleFileSelect (/home/claude/regressao/15c2127/adapt/app/dashboard/upload/page.js:48:26)
+
+      58 |       setProvaId(provaIdCriado);
+      59 |     } catch (err) {
+    > 60 |       console.error("❌ Erro no upload:", err);
+         |               ^
+      61 |       setError(err.message);
+      62 |     } finally {
+      63 |       setUploading(false);
+
+      at error (app/dashboard/upload/page.js:60:15)
+
+PASS __tests__/UploadPage.test.jsx
+  UploadPage – Upload Unitário
+    ✓ renderiza título e uploader (4 ms)
+    ✓ envia arquivo e exibe ArquivoCarregado (7 ms)
+    ✓ mostra mensagem de processando arquivo durante upload (5 ms)
+    ✓ permite remover arquivo e resetar estado (6 ms)
+    ✓ mostra erro se fetch falha (6 ms)
+
+  console.error
+    Received `true` for a non-boolean attribute `priority`.
+    
+    If you want to write it to the DOM, pass a string instead: priority="true" or priority={value.toString()}.
+
+      55 |
+      56 |   test("renderiza os campos do formulário", () => {
+    > 57 |     render(<SignUpPage />);
+         |           ^
+      58 |
+      59 |     expect(screen.getByPlaceholderText("Nome de usuário")).toBeInTheDocument();
+      60 |     expect(screen.getByPlaceholderText("E-mail")).toBeInTheDocument();
+
+      at validateProperty (node_modules/react-dom/cjs/react-dom-client.development.js:3078:27)
+      at warnUnknownProperties (node_modules/react-dom/cjs/react-dom-client.development.js:3154:9)
+      at validatePropertiesInDevelopment (node_modules/react-dom/cjs/react-dom-client.development.js:17117:9)
+      at setInitialProperties (node_modules/react-dom/cjs/react-dom-client.development.js:17741:7)
+      at completeWork (node_modules/react-dom/cjs/react-dom-client.development.js:11391:18)
+      at runWithFiberInDEV (node_modules/react-dom/cjs/react-dom-client.development.js:1522:13)
+      at completeUnitOfWork (node_modules/react-dom/cjs/react-dom-client.development.js:15268:19)
+      at performUnitOfWork (node_modules/react-dom/cjs/react-dom-client.development.js:15149:11)
+      at workLoopSync (node_modules/react-dom/cjs/react-dom-client.development.js:14956:41)
+      at renderRootSync (node_modules/react-dom/cjs/react-dom-client.development.js:14936:11)
+      at performWorkOnRoot (node_modules/react-dom/cjs/react-dom-client.development.js:14419:13)
+      at performWorkOnRootViaSchedulerTask (node_modules/react-dom/cjs/react-dom-client.development.js:16216:7)
+      at flushActQueue (node_modules/react/cjs/react.development.js:566:34)
+      at process.env.NODE_ENV.exports.act (node_modules/react/cjs/react.development.js:859:10)
+      at node_modules/@testing-library/react/dist/act-compat.js:47:25
+      at renderRoot (node_modules/@testing-library/react/dist/pure.js:190:26)
+      at render (node_modules/@testing-library/react/dist/pure.js:292:10)
+      at Object.<anonymous> (__tests__/SignUpPage.test.jsx:57:11)
+
+PASS __tests__/SignUpPage.test.jsx
+  ✓ renderiza o footer (3 ms)
+  SignUpPage
+    ✓ renderiza os campos do formulário (56 ms)
+    ✓ permite digitar nos inputs (7 ms)
+    ✓ cria conta com sucesso e redireciona (63 ms)
+    ✓ mostra erro quando signUp falha (16 ms)
+
+PASS __tests__/LoginPage.test.jsx
+  LoginPage
+    ✓ renderiza os campos do formulário (17 ms)
+    ✓ permite digitar nos inputs (6 ms)
+    ✓ realiza login com sucesso e redireciona (68 ms)
+    ✓ mostra erro quando login falha (26 ms)
+    ✓ renderiza o footer (6 ms)
+
+FAIL __tests__/SalvasPage.test.jsx
+  SalvasPage – Excluir Prova
+    ✕ exclui prova ao clicar no botão e confirmar (1008 ms)
+
+  ● SalvasPage – Excluir Prova › exclui prova ao clicar no botão e confirmar
+
+    Found multiple elements with the text: Prova Teste
+
+    Here are the matching elements:
+
+    Ignored nodes: comments, script, style
+    [36m<h2[39m
+      [33mclass[39m=[32m"summaryValue"[39m
+    [36m>[39m
+      [0mProva Teste[0m
+    [36m</h2>[39m
+
+    Ignored nodes: comments, script, style
+    [36m<h3>[39m
+      [0mProva Teste[0m
+    [36m</h3>[39m
+
+    (If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+    Ignored nodes: comments, script, style
+    [36m<body>[39m
+      [36m<div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"main"[39m
+        [36m>[39m
+          [36m<header[39m
+            [33mclass[39m=[32m"header"[39m
+          [36m>[39m
+            [36m<h1>[39m
+              [0mProvas Salvas[0m
+            [36m</h1>[39m
+            [36m<p>[39m
+              [0mGerencie suas provas adaptadas recentes.[0m
+            [36m</p>[39m
+          [36m</header>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"summary"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"summaryCard"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"summaryLabel"[39m
+              [36m>[39m
+                [0mTotal de Provas[0m
+              [36m</span>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"summaryValue"[39m
+              [36m>[39m
+                [0m1[0m
+              [36m</h2>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"summaryCard"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"summaryLabel"[39m
+              [36m>[39m
+                [0mÚltima Criada[0m
+              [36m</span>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"summaryValue"[39m
+              [36m>[39m
+                [0m31/12/2024[0m
+              [36m</h2>[39m
+            [36m</div>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"summaryCard"[39m
+            [36m>[39m
+              [36m<span[39m
+                [33mclass[39m=[32m"summaryLabel"[39m
+              [36m>[39m
+                [0mMais Recente[0m
+              [36m</span>[39m
+              [36m<h2[39m
+                [33mclass[39m=[32m"summaryValue"[39m
+              [36m>[39m
+                [0mProva Teste[0m
+              [36m</h2>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"chartSection"[39m
+          [36m>[39m
+            [36m<h2>[39m
+              [0mProvas Criadas por Mês[0m
+            [36m</h2>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"chartContainer"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"barGroup"[39m
+              [36m>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"bar"[39m
+                  [33mstyle[39m=[32m"height: 140px;"[39m
+                [36m/>[39m
+                [36m<span[39m
+                  [33mclass[39m=[32m"barLabel"[39m
+                [36m>[39m
+                  [0mdez.[0m
+                [36m</span>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+          [36m<section[39m
+            [33mclass[39m=[32m"cardsGrid"[39m
+          [36m>[39m
+            [36m<div[39m
+              [33mclass[39m=[32m"card"[39m
+            [36m>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"cardIcon"[39m
+              [36m>[39m
+                [0m📄[0m
+              [36m</div>[39m
+              [36m<div[39m
+                [33mclass[39m=[32m"cardBody"[39m
+              [36m>[39m
+                [36m<h3>[39m
+                  [0mProva Teste[0m
+                [36m</h3>[39m
+                [36m<p[39m
+                  [33mclass[39m=[32m"cardDate"[39m
+                [36m>[39m
+                  [0mEnviada em 31/12/2024[0m
+                [36m</p>[39m
+                [36m<div[39m
+                  [33mclass[39m=[32m"cardActions"[39m
+                [36m>[39m
+                  [36m<a[39m
+                    [33mclass[39m=[32m"openBtn"[39m
+                    [33mhref[39m=[32m"https://fake-url.com/prova.pdf"[39m
+                    [33mrel[39m=[32m"noopener noreferrer"[39m
+                    [33mtarget[39m=[32m"_blank"[39m
+                  [36m>[39m
+                    [0mAbrir[0m
+                  [36m</a>[39m
+                  [36m<a[39m
+                    [33mclass[39m=[32m"downloadBtn"[39m
+                    [33mdownload[39m=[32m""[39m
+                    [33mhref[39m=[32m"https://fake-url.com/prova.pdf"[39m
+                  [36m>[39m
+                    [0mBaixar[0m
+                  [36m</a>[39m
+                  [36m<button[39m
+                    [33mclass[39m=[32m"deleteBtn"[39m
+                  [36m>[39m
+                    [0mExcluir[0m
+                  [36m</button>[39m
+                [36m</div>[39m
+              [36m</div>[39m
+            [36m</div>[39m
+          [36m</section>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</body>[39m
+
+      39 |
+      40 |     // Espera a prova ser carregada
+    > 41 |     const provaTitulo = await screen.findByText("Prova Teste");
+         |                                      ^
+      42 |     expect(provaTitulo).toBeInTheDocument();
+      43 |
+      44 |     // Clica no botão Excluir
+
+      at waitForWrapper (node_modules/@testing-library/dom/dist/wait-for.js:163:27)
+      at node_modules/@testing-library/dom/dist/query-helpers.js:86:33
+      at Object.findByText (__tests__/SalvasPage.test.jsx:41:38)
+
+PASS __tests__/VisualizacaoProva.test.jsx
+  VisualizacaoProva
+    ✓ exibe mensagem quando não há questões (3 ms)
+    ✓ renderiza questões do parsedQuestions quando existem (4 ms)
+    ✓ usa originalQuestions se parsedQuestions não existir (6 ms)
+
+PASS __tests__/LogoutPage.test.jsx
+  LogoutPage
+    ✓ exibe mensagem de saída e chama logout e redirecionamento (55 ms)
+
+Test Suites: 2 failed, 5 passed, 7 total
+Tests:       5 failed, 19 passed, 24 total
+Snapshots:   0 total
+Time:        6.506 s
+Ran all test suites.
