@@ -1,0 +1,41 @@
+# Ambiente de execucao e confirmacao do ACH-05
+# Executado em: 19/11/2026 17:39 | pasta: Adapt/adapt
+
+== 1. Sistema e ferramentas ==
+Sistema operacional: Ubuntu 24.04.5 LTS (Linux 6.18.44-fc-v653)
+node v22.23.4
+npm 10.9.9
+
+== 2. Versoes instaladas (npm ls --depth=0) ==
++-- @testing-library/jest-dom@6.9.1
++-- @testing-library/react@16.3.0
++-- @testing-library/user-event@14.6.1
++-- jest-environment-jsdom@30.2.0
++-- jest@30.2.0
++-- mammoth@1.11.0
++-- next@15.5.4
++-- parse@6.1.1
++-- react-dom@19.1.0
+`-- react@19.1.0
+
+
+== 3. Script de teste definido no package.json ==
+    "test": "jest --watchAll"
+
+== 4. npm test (jest --watchAll), limitado a 90 s com 'timeout 90 npm test' ==
+Test Suites: 4 failed, 10 passed, 14 total
+Tests:       8 failed, 52 passed, 60 total
+Time:        7.682 s, estimated 11 s
+Codigo de saida: 124 (124 = processo encerrado a forca pelo timeout)
+Tempo total ate encerrar: 90 s
+Conclusao: os testes terminam em poucos segundos, mas o processo continua aberto
+esperando alteracoes nos arquivos e nunca encerra sozinho (ACH-05 confirmado).
+
+== 5. npx jest --watchAll=false (comando usado pela equipe) ==
+Test Suites: 4 failed, 10 passed, 14 total
+Tests:       8 failed, 52 passed, 60 total
+Time:        7.368 s
+Codigo de saida: 1 (1 = terminou sozinho e informou que ha testes falhando)
+Tempo total ate encerrar: 9 s
+Conclusao: com --watchAll=false a execucao roda uma vez e encerra sozinha.
+Os totais incluem a suite dos autores (24) e a suite da equipe (36): 60 testes.
