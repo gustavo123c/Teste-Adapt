@@ -1,0 +1,9 @@
+     1	import Parse from "parse/dist/parse.min.js";
+     2	
+     3	Parse.initialize(
+     4	  "***MASCARADO***",
+     5	  "***MASCARADO***"
+     6	);
+     7	Parse.serverURL = "https://parseapi.back4app.com/";
+     8	
+     9	export default Parse;

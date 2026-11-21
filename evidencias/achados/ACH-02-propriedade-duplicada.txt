@@ -1,0 +1,2 @@
+25:    arquivoAdaptadoUrl: p.get("arquivoAdaptado")?.url() || null,
+26:    arquivoAdaptadoUrl: p.get("arquivoAdaptado")?.url() || null,

@@ -1,0 +1,15 @@
+    18	  const results = await query.find();
+    19	
+    20	  return results.map(p => ({
+    21	    id: p.id,
+    22	    titulo: p.get("titulo") || null,
+    23	    criadoEm: p.createdAt,
+    24	
+    25	    arquivoAdaptadoUrl: p.get("arquivoAdaptado")?.url() || null,
+    26	    arquivoAdaptadoUrl: p.get("arquivoAdaptado")?.url() || null,
+    27	    adaptedText: p.get("adaptedText") || null,
+    28	
+    29	    arquivoUrl: p.get("arquivoOriginal")?.url() || null,
+    30	    //arquivoName: p.get("arquivoOriginal")?.name() || null,
+    31	  }));
+    32	}
