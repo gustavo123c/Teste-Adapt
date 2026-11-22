@@ -8,7 +8,7 @@ Todos os comandos rodam dentro da pasta `Adapt/adapt` (onde fica o `package.json
 
 ```bash
 npm ci                                              # instala as dependências
-npx jest --watchAll=false --verbose __tests__/qa    # suíte da equipe (36 testes)
+npx jest --watchAll=false --verbose __tests__/qa    # suíte da equipe (48 testes)
 npx jest --watchAll=false                           # suíte dos autores + suíte da equipe
 npx jest --watchAll=false --coverage __tests__/qa   # relatório de cobertura
 ```
@@ -37,6 +37,8 @@ Mock x Parse falso: o mock só devolve respostas prontas para uma função isola
 | `baselineDiagnostico.unit.test.jsx` | Unitário | CT-U21 a U24 (causa das falhas do baseline) |
 | `provas.integration.test.js` | Integração | CT-I01 a I04 |
 | `parseApi.integration.test.js` | Integração | CT-I05 a I11 |
+| `generatePdf.unit.test.js` | Unitário | CT-U25 a U33 (rota /api/generate-pdf) |
+| `fluxoCompleto.integration.test.js` | Integração | CT-I12 a I14 (fluxo completo e exclusão) |
 
 ## Ambiente usado
 
