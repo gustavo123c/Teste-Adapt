@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { POST } from "../../app/api/generate-pdf/route";
 
 const mockCreatePdf = jest.fn();

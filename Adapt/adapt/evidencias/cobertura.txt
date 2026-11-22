@@ -1,0 +1,126 @@
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+FAIL __tests__/qa/generatePdf.unit.test.js
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U33 linha de questao iniciada por '# ' deveria continuar como texto, e nao virar titulo
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      126 |
+      127 |     const corpo = blocos("questionBody")[0].stack;
+    > 128 |     expect(corpo.some((b) => b.style === "mdH1")).toBe(false);
+          |                                                   ^
+      129 |     expect(JSON.stringify(corpo)).toContain("# de lados de um triângulo");
+      130 |   });
+      131 | });
+
+      at Object.toBe (__tests__/qa/generatePdf.unit.test.js:128:51)
+
+FAIL __tests__/qa/parseApi.integration.test.js
+  ● Console
+
+    console.error
+      Error: Could not find file in options
+          at Object.openZip (/workspaces/Teste-Adapt/Adapt/adapt/node_modules/mammoth/lib/unzip.js:18:32)
+          at Object.extractRawText (/workspaces/Teste-Adapt/Adapt/adapt/node_modules/mammoth/lib/index.js:82:18)
+          at extractRawText (/workspaces/Teste-Adapt/Adapt/adapt/app/api/parse-docx/route.js:15:34)
+          at Object.<anonymous> (/workspaces/Teste-Adapt/Adapt/adapt/__tests__/qa/parseApi.integration.test.js:26:17)
+
+      20 |     });
+      21 |   } catch (err) {
+    > 22 |     console.error(err);
+         |             ^
+      23 |     return new Response(JSON.stringify({ error: err.message }), {
+      24 |       status: 500,
+      25 |       headers: { "Content-Type": "application/json" },
+
+      at error (app/api/parse-docx/route.js:22:13)
+      at Object.<anonymous> (__tests__/qa/parseApi.integration.test.js:26:17)
+
+  ● Integracao: /api/parse-docx › CT-I05 extrai o texto de um .docx real
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 200
+    Received: 500
+
+      26 |     const res = await parseDocx(reqWith("http://localhost/api/parse-docx", makeDocxFile(PROVA_DOCX_B64)));
+      27 |     const body = await res.json();
+    > 28 |     expect(res.status).toBe(200);
+         |                        ^
+      29 |     expect(body.text).toContain("Quanto é 2 + 2");
+      30 |     expect(body.text).toContain("capital do Brasil");
+      31 |   });
+
+      at Object.toBe (__tests__/qa/parseApi.integration.test.js:28:24)
+
+  ● Integracao: /api/parse-file › CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500)
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 400
+    Received: 500
+
+      69 |   test("CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500)", async () => {
+      70 |     const res = await parseFile(reqWith("http://localhost/api/parse-file", null));
+    > 71 |     expect(res.status).toBe(400);
+         |                        ^
+      72 |   });
+      73 |
+      74 |   test("CT-I11 GET informa que a API esta operacional", async () => {
+
+      at Object.toBe (__tests__/qa/parseApi.integration.test.js:71:24)
+
+FAIL __tests__/qa/downloadUtils.unit.test.js
+  ● gerarPDFAdaptado (unitario) › CT-U13 nome padrao (sem arquivo selecionado) deveria ser 'prova_adaptada.pdf'
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "prova_adaptada.pdf"
+    Received: "prova_adaptada_adaptada.pdf"
+
+      103 |       adaptedData: { adaptedQuestions: ["Q1"] },
+      104 |     });
+    > 105 |     expect(safeName).toBe("prova_adaptada.pdf");
+          |                      ^
+      106 |   });
+      107 | });
+      108 |
+
+      at Object.toBe (__tests__/qa/downloadUtils.unit.test.js:105:22)
+
+PASS __tests__/qa/fluxoCompleto.integration.test.js
+PASS __tests__/qa/baselineDiagnostico.unit.test.jsx
+PASS __tests__/qa/parseFile.unit.test.js
+PASS __tests__/qa/provasService.unit.test.js
+PASS __tests__/qa/uploadFile.unit.test.js
+PASS __tests__/qa/provas.integration.test.js
+----------------------|---------|----------|---------|---------|-------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------------------|---------|----------|---------|---------|-------------------
+All files             |   84.49 |    74.28 |   81.08 |   87.18 |                   
+ app/api/generate-pdf |   74.19 |    68.29 |    90.9 |   77.77 |                   
+  route.js            |   74.19 |    68.29 |    90.9 |   77.77 | 34-39,59-80       
+ app/api/parse-docx   |    92.3 |      100 |     100 |   91.66 |                   
+  route.js            |    92.3 |      100 |     100 |   91.66 | 17                
+ app/api/parse-file   |   70.58 |       80 |      50 |   74.46 |                   
+  route.js            |   70.58 |       80 |      50 |   74.46 | 22-42,72          
+ app/back4app/provas  |   97.77 |    89.47 |     100 |     100 |                   
+  deleteProvas.js     |   88.88 |       50 |     100 |     100 | 7                 
+  getProvasUser.js    |     100 |    94.11 |     100 |     100 | 14                
+  uploadFile.js       |     100 |      100 |     100 |     100 |                   
+ app/dashboard/salvas |   71.42 |    42.85 |   66.66 |   76.19 |                   
+  page.js             |   71.42 |    42.85 |   66.66 |   76.19 | 25-26,38-46,175   
+ app/dashboard/upload |     100 |      100 |     100 |     100 |                   
+  downloadUtils.js    |     100 |      100 |     100 |     100 |                   
+ test-utils           |   97.18 |    73.68 |   93.33 |   98.36 |                   
+  docxFixtures.js     |     100 |    66.66 |     100 |     100 | 17                
+  fakeParse.js        |   96.87 |       75 |    93.1 |   98.14 | 26                
+----------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 3 failed, 6 passed, 9 total
+Tests:       4 failed, 44 passed, 48 total
+Snapshots:   0 total
+Time:        4.504 s
+Ran all test suites matching __tests__/qa.

@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { POST as parseFile } from "../../app/api/parse-file/route";
 import { POST as generatePdf } from "../../app/api/generate-pdf/route";
 import { uploadFile } from "../../app/back4app/provas/uploadFile";
