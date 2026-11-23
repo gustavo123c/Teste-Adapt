@@ -1,68 +1,135 @@
-# Regressao - suite da equipe (__tests__/qa)
-# Commit: 15c2127074c48f8d685a60d9a477cceb66aa8820
+# Regressao - suite da equipe (__tests__/qa, 48 casos: 34 unitarios + 14 de integracao)
+# Commit testado: 15c2127074c48f8d685a60d9a477cceb66aa8820
 # Data do commit: 2025-11-19 Teste att
-# Executado em: 18/11/2026 15:24 | node v22.23.5 | npm 10.9.9
+# Testes copiados de: github.com/gustavo123c/Teste-Adapt @ 2a64048
+# Executado em: 22/11/2026 23:24 | node v22.23.5 | npm 10.9.9
 # Comando: npx jest --watchAll=false --verbose __tests__/qa
 
-FAIL __tests__/qa/provas.integration.test.js
-  Integracao: upload -> adaptacao -> listagem -> exclusao
-    ✓ CT-I01 gerarPDFAdaptado integra Parse + /api/generate-pdf e grava o PDF adaptado na prova (4 ms)
-    ✕ CT-I02 getProvasUser so lista provas que ja possuem arquivo adaptado (2 ms)
-    ✓ CT-I03 provas de outro usuario nao aparecem na listagem (1 ms)
-    ✓ CT-I04 deleteProva remove a prova e ela some da listagem (3 ms)
+FAIL __tests__/qa/generatePdf.unit.test.js
+  POST /api/generate-pdf - validacao da entrada
+    ✕ CT-U25 retorna 400 quando a lista de questoes adaptadas esta vazia (11 ms)
+    ✓ CT-U26 retorna 400 quando o campo adaptedQuestions nao e enviado (1 ms)
+    ✓ CT-U27 retorna 500 com a mensagem do erro quando o corpo nao e JSON valido (1 ms)
+  POST /api/generate-pdf - resposta e conteudo do documento
+    ✓ CT-U28 responde com o PDF gerado, Content-Type application/pdf e nome prova_adaptada.pdf (2 ms)
+    ✕ CT-U29 cria um titulo 'QUESTÃO n' por questao, na ordem recebida (3 ms)
+    ✕ CT-U30 usa cabecalho padrao sem metadata e preenche os campos quando ela e enviada (3 ms)
+    ✕ CT-U31 mostra aviso quando nao ha instrucoes e interpreta markdown quando ha (1 ms)
+    ✕ CT-U32 converte **negrito** e itens de lista dentro da questao (7 ms)
+    ✕ CT-U33 linha de questao iniciada por '# ' deveria continuar como texto, e nao virar titulo (1 ms)
 
-  ● Integracao: upload -> adaptacao -> listagem -> exclusao › CT-I02 getProvasUser so lista provas que ja possuem arquivo adaptado
-
-    expect(received).not.toContain(expected) // indexOf
-
-    Expected value: not "obj1"
-    Received array:     ["obj2", "obj1"]
-
-      63 |     expect(ids).toContain(comAdaptacao);
-      64 |     // Comportamento atual (possivel defeito/decisao de projeto): prova sem adaptacao nao aparece
-    > 65 |     expect(ids).not.toContain(semAdaptacao);
-         |                     ^
-      66 |     expect(lista[0].arquivoAdaptadoUrl).toBe("https://fake.parse/files/com_adaptada.pdf");
-      67 |   });
-      68 |
-
-      at Object.toContain (__tests__/qa/provas.integration.test.js:65:21)
-
-FAIL __tests__/qa/downloadUtils.unit.test.js
-  gerarPDFAdaptado (unitario)
-    ✓ CT-U04 lanca erro quando nao ha provaId (4 ms)
-    ✓ CT-U04b lanca erro quando nao ha adaptedData (1 ms)
-    ✓ CT-U05 lanca erro quando a prova nao tem URL do arquivo original (1 ms)
-    ✓ CT-U06 lanca erro quando a lista de questoes adaptadas esta vazia (1 ms)
-    ✓ CT-U10 usa o formato alternativo questoes[].adaptada quando nao ha adaptedQuestions (2 ms)
-    ✓ CT-U11 lanca 'Erro ao gerar PDF.' quando a API responde com falha (1 ms)
-    ✓ CT-U12 nomeia o arquivo com base no arquivo selecionado (1 ms)
-    ✕ CT-U13 nome padrao (sem arquivo selecionado) deveria ser 'prova_adaptada.pdf' (2 ms)
-
-  ● gerarPDFAdaptado (unitario) › CT-U13 nome padrao (sem arquivo selecionado) deveria ser 'prova_adaptada.pdf'
+  ● POST /api/generate-pdf - validacao da entrada › CT-U25 retorna 400 quando a lista de questoes adaptadas esta vazia
 
     expect(received).toBe(expected) // Object.is equality
 
-    Expected: "prova_adaptada.pdf"
-    Received: "prova_adaptada_adaptada.pdf"
+    Expected: "Nenhuma questão adaptada foi enviada."
+    Received: "adaptedQuestions são obrigatórios"
 
-      103 |       adaptedData: { adaptedQuestions: ["Q1"] },
-      104 |     });
-    > 105 |     expect(safeName).toBe("prova_adaptada.pdf");
-          |                      ^
-      106 |   });
-      107 | });
-      108 |
+      42 |     const res = await POST(postJson({ adaptedQuestions: [] }));
+      43 |     expect(res.status).toBe(400);
+    > 44 |     expect((await res.json()).error).toBe("Nenhuma questão adaptada foi enviada.");
+         |                                      ^
+      45 |     expect(mockCreatePdf).not.toHaveBeenCalled();
+      46 |   });
+      47 |
 
-      at Object.toBe (__tests__/qa/downloadUtils.unit.test.js:105:22)
+      at Object.toBe (__tests__/qa/generatePdf.unit.test.js:44:38)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U29 cria um titulo 'QUESTÃO n' por questao, na ordem recebida
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Array [
+    -   "QUESTÃO 1",
+    -   "QUESTÃO 2",
+    -   "QUESTÃO 3",
+    +   "Questão 1",
+    +   "Questão 2",
+    +   "Questão 3",
+      ]
+
+      73 |     await POST(postJson({ adaptedQuestions: ["Primeira", "Segunda", "Terceira"] }));
+      74 |
+    > 75 |     expect(blocos("questionTitle").map((b) => b.text)).toEqual([
+         |                                                        ^
+      76 |       "QUESTÃO 1",
+      77 |       "QUESTÃO 2",
+      78 |       "QUESTÃO 3",
+
+      at Object.toEqual (__tests__/qa/generatePdf.unit.test.js:75:56)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U30 usa cabecalho padrao sem metadata e preenche os campos quando ela e enviada
+
+    expect(received).toContain(expected) // indexOf
+
+    Expected substring: "UNICAP"
+    Received string:    "[{\"text\":\"PROVA ADAPTADA PARA ESTUDANTES COM TDAH\",\"style\":\"headerTitle\",\"alignment\":\"center\",\"margin\":[0,0,0,10]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Disciplina: Matemática\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Professor(a): Ana\",\"style\":\"headerField\"}]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Curso/Série: _________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Data: 01/12/2025\",\"style\":\"headerField\"}]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Aluno(a): ____________________________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Nota: _______\",\"style\":\"headerField\"}]},{\"text\":\"\",\"margin\":[0,10]},{\"canvas\":[{\"type\":\"line\",\"x1\":0,\"y1\":0,\"x2\":515,\"y2\":0,\"lineWidth\":1}]},{\"text\":\"\",\"margin\":[0,10]},{\"text\":\"INSTRUÇÕES:\",\"style\":\"sectionTitle\"},{\"ul\":[\"Leia cada questão com atenção.\",\"Responda todas as questões.\",\"Use caneta azul ou preta.\",\"Não é permitido consultar materiais.\",\"Não é permitido o uso de dispositivos eletrônicos.\"],\"style\":\"instructions\",\"margin\":[0,5,0,15]},{\"text\":\"Questão 1\",\"style\":\"questionTitle\"},{\"text\":\"Q1\",\"style\":\"questionBody\",\"margin\":[0,4,0,12]}]"
+
+       95 |     );
+       96 |     const comMetadata = JSON.stringify(docDefinition().content);
+    >  97 |     expect(comMetadata).toContain("UNICAP");
+          |                         ^
+       98 |     expect(comMetadata).toContain("Disciplina: Matemática");
+       99 |     expect(comMetadata).toContain("Professor(a): Ana");
+      100 |     expect(comMetadata).toContain("Data: 01/12/2025");
+
+      at Object.toContain (__tests__/qa/generatePdf.unit.test.js:97:25)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U31 mostra aviso quando nao ha instrucoes e interpreta markdown quando ha
+
+    expect(received).toContain(expected) // indexOf
+
+    Expected substring: "[Nenhuma instrução fornecida]"
+    Received string:    "[{\"text\":\"PROVA ADAPTADA PARA ESTUDANTES COM TDAH\",\"style\":\"headerTitle\",\"alignment\":\"center\",\"margin\":[0,0,0,10]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Disciplina: _________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Professor(a): _________\",\"style\":\"headerField\"}]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Curso/Série: _________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Data: ___/___/____\",\"style\":\"headerField\"}]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Aluno(a): ____________________________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Nota: _______\",\"style\":\"headerField\"}]},{\"text\":\"\",\"margin\":[0,10]},{\"canvas\":[{\"type\":\"line\",\"x1\":0,\"y1\":0,\"x2\":515,\"y2\":0,\"lineWidth\":1}]},{\"text\":\"\",\"margin\":[0,10]},{\"text\":\"INSTRUÇÕES:\",\"style\":\"sectionTitle\"},{\"ul\":[\"Leia cada questão com atenção.\",\"Responda todas as questões.\",\"Use caneta azul ou preta.\",\"Não é permitido consultar materiais.\",\"Não é permitido o uso de dispositivos eletrônicos.\"],\"style\":\"instructions\",\"margin\":[0,5,0,15]},{\"text\":\"Questão 1\",\"style\":\"questionTitle\"},{\"text\":\"Q1\",\"style\":\"questionBody\",\"margin\":[0,4,0,12]}]"
+
+      103 |   test("CT-U31 mostra aviso quando nao ha instrucoes e interpreta markdown quando ha", async () => {
+      104 |     await POST(postJson({ adaptedQuestions: ["Q1"] }));
+    > 105 |     expect(JSON.stringify(docDefinition().content)).toContain("[Nenhuma instrução fornecida]");
+          |                                                     ^
+      106 |
+      107 |     await POST(
+      108 |       postJson({ adaptedQuestions: ["Q1"], instrucoesOriginais: "# Atenção\n- Use caneta azul" })
+
+      at Object.toContain (__tests__/qa/generatePdf.unit.test.js:105:53)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U32 converte **negrito** e itens de lista dentro da questao
+
+    TypeError: Cannot read properties of undefined (reading '0')
+
+      117 |
+      118 |     const corpo = blocos("questionBody")[0].stack;
+    > 119 |     expect(corpo[0].text).toEqual([{ text: "Calcule " }, { text: "2 + 2", bold: true }]);
+          |                 ^
+      120 |     expect(corpo[1]).toMatchObject({ ul: ["opção A"], style: "mdList" });
+      121 |     expect(corpo[2]).toMatchObject({ ul: ["opção B"], style: "mdList" });
+      122 |   });
+
+      at Object.<anonymous> (__tests__/qa/generatePdf.unit.test.js:119:17)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U33 linha de questao iniciada por '# ' deveria continuar como texto, e nao virar titulo
+
+    TypeError: Cannot read properties of undefined (reading 'some')
+
+      126 |
+      127 |     const corpo = blocos("questionBody")[0].stack;
+    > 128 |     expect(corpo.some((b) => b.style === "mdH1")).toBe(false);
+          |                  ^
+      129 |     expect(JSON.stringify(corpo)).toContain("# de lados de um triângulo");
+      130 |   });
+      131 | });
+
+      at Object.some (__tests__/qa/generatePdf.unit.test.js:128:18)
 
 FAIL __tests__/qa/baselineDiagnostico.unit.test.jsx
   Diagnostico DEF-01 a DEF-04 (UploadPage.download.test.jsx)
-    ✓ CT-U21: uploadFile falha quando save() devolve true, como no mock dos autores (5 ms)
+    ✓ CT-U21: uploadFile falha quando save() devolve true, como no mock dos autores (4 ms)
     ✓ CT-U22: uploadFile funciona quando save() devolve o proprio arquivo (comportamento real do Parse) (1 ms)
   Diagnostico DEF-05 (SalvasPage.test.jsx)
-    ✕ CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista (1024 ms)
-    ✓ CT-U24: prova com arquivoAdaptadoUrl aparece na lista (13 ms)
+    ✕ CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista (1018 ms)
+    ✓ CT-U24: prova com arquivoAdaptadoUrl aparece na lista (16 ms)
 
   ● Diagnostico DEF-05 (SalvasPage.test.jsx) › CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista
 
@@ -219,6 +286,56 @@ FAIL __tests__/qa/baselineDiagnostico.unit.test.jsx
       at node_modules/@testing-library/dom/dist/query-helpers.js:86:33
       at Object.findByText (__tests__/qa/baselineDiagnostico.unit.test.jsx:78:25)
 
+FAIL __tests__/qa/fluxoCompleto.integration.test.js
+  Integracao: fluxo completo .docx -> upload -> PDF adaptado -> listagem
+    ✕ CT-I12 questoes extraidas do .docx viram um PDF real salvo na prova do usuario (304 ms)
+    ✕ CT-I13 falha na geracao do PDF e propagada e a prova nao fica com arquivo adaptado (90 ms)
+  Integracao: isolamento entre usuarios na exclusao
+    ✓ CT-I14 deleteProva nao confere o dono: user-2 consegue apagar a prova de user-1 (67 ms)
+
+  ● Integracao: fluxo completo .docx -> upload -> PDF adaptado -> listagem › CT-I12 questoes extraidas do .docx viram um PDF real salvo na prova do usuario
+
+    expect(received).toMatchObject(expected)
+
+    - Expected  - 2
+    + Received  + 1
+
+      Object {
+    -   "arquivoAdaptadoUrl": "https://fake.parse/files/prova_adaptada.pdf",
+        "arquivoUrl": "https://fake.parse/files/prova.docx",
+        "id": "obj1",
+    -   "titulo": "prova.docx",
+    +   "titulo": null,
+      }
+
+      69 |     const lista = await getProvasUser();
+      70 |     expect(lista).toHaveLength(1);
+    > 71 |     expect(lista[0]).toMatchObject({
+         |                      ^
+      72 |       id: provaId,
+      73 |       titulo: "prova.docx",
+      74 |       arquivoUrl: "https://fake.parse/files/prova.docx",
+
+      at Object.toMatchObject (__tests__/qa/fluxoCompleto.integration.test.js:71:22)
+
+  ● Integracao: fluxo completo .docx -> upload -> PDF adaptado -> listagem › CT-I13 falha na geracao do PDF e propagada e a prova nao fica com arquivo adaptado
+
+    expect(received).rejects.toThrow()
+
+    Received promise resolved instead of rejected
+    Resolved to value: {"blob": {Symbol(kHandle): {}, Symbol(kLength): 18468, Symbol(kType): "application/pdf"}, "safeName": "prova_adaptada_adaptada.pdf"}
+
+      80 |     const provaId = await uploadFile(makeDocxFile(PROVA_DOCX_B64, "prova.docx"));
+      81 |
+    > 82 |     await expect(
+         |           ^
+      83 |       gerarPDFAdaptado({
+      84 |         provaId,
+      85 |         adaptedData: { questoes: [{ original: "1) Quanto é 2 + 2 na matemática?" }] },
+
+      at expect (node_modules/expect/build/index.js:2116:15)
+      at Object.expect (__tests__/qa/fluxoCompleto.integration.test.js:82:11)
+
   console.error
     Error: Could not find file in options
         at Object.openZip (/home/claude/regressao/15c2127/adapt/node_modules/mammoth/lib/unzip.js:18:32)
@@ -239,11 +356,11 @@ FAIL __tests__/qa/baselineDiagnostico.unit.test.jsx
 
 FAIL __tests__/qa/parseApi.integration.test.js
   Integracao: /api/parse-docx
-    ✕ CT-I05 extrai o texto de um .docx real (22 ms)
-    ✓ CT-I06 retorna 400 quando nenhum arquivo e enviado (1 ms)
+    ✕ CT-I05 extrai o texto de um .docx real (18 ms)
+    ✓ CT-I06 retorna 400 quando nenhum arquivo e enviado (5 ms)
   Integracao: /api/parse-file
-    ✓ CT-I07 detecta 2 questoes numeradas em um .docx real (15 ms)
-    ✓ CT-I08 retorna 400 'Nenhuma questao detectada' para .docx sem numeracao (4 ms)
+    ✓ CT-I07 detecta 2 questoes numeradas em um .docx real (5 ms)
+    ✓ CT-I08 retorna 400 'Nenhuma questao detectada' para .docx sem numeracao (3 ms)
     ✓ CT-I09 rejeita formato nao suportado (text/plain) com 400 (1 ms)
     ✕ CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500) (1 ms)
     ✓ CT-I11 GET informa que a API esta operacional (1 ms)
@@ -284,11 +401,11 @@ FAIL __tests__/qa/parseApi.integration.test.js
 
 FAIL __tests__/qa/provasService.unit.test.js
   getProvasUser (unitario)
-    ✓ CT-U07 lanca erro quando nao ha usuario autenticado (5 ms)
-    ✕ CT-U14 filtra por usuario e mapeia os campos retornados
+    ✓ CT-U07 lanca erro quando nao ha usuario autenticado (3 ms)
+    ✕ CT-U14 filtra por usuario e mapeia os campos retornados (1 ms)
   deleteProva (unitario)
-    ✓ CT-U08 busca a prova pelo id, chama destroy e retorna true (1 ms)
-    ✓ CT-U15 propaga o erro quando a prova nao existe
+    ✓ CT-U08 busca a prova pelo id, chama destroy e retorna true
+    ✓ CT-U15 propaga o erro quando a prova nao existe (1 ms)
 
   ● getProvasUser (unitario) › CT-U14 filtra por usuario e mapeia os campos retornados
 
@@ -307,19 +424,63 @@ FAIL __tests__/qa/provasService.unit.test.js
       at map (app/back4app/provas/getProvasUser.js:15:18)
       at Object.<anonymous> (__tests__/qa/provasService.unit.test.js:56:20)
 
-PASS __tests__/qa/parseFile.unit.test.js
-  POST /api/parse-file (unitario, mammoth mockado)
-    ✓ CT-U16 retorna 400 quando o texto extraido e curto demais (2 ms)
-    ✓ CT-U17 extrai questoes numeradas com ids q1, q2 (1 ms)
-    ✓ CT-U18 ignora itens numerados muito curtos (<= 10 caracteres) (1 ms)
-    ✓ CT-U19 remove a linha de cabecalho 'Instrucoes:' antes de extrair (1 ms)
-    ✓ CT-U20 GET retorna mensagem de API operacional (1 ms)
+FAIL __tests__/qa/provas.integration.test.js
+  Integracao: upload -> adaptacao -> listagem -> exclusao
+    ✓ CT-I01 gerarPDFAdaptado integra Parse + /api/generate-pdf e grava o PDF adaptado na prova (4 ms)
+    ✕ CT-I02 getProvasUser so lista provas que ja possuem arquivo adaptado (1 ms)
+    ✓ CT-I03 provas de outro usuario nao aparecem na listagem (3 ms)
+    ✓ CT-I04 deleteProva remove a prova e ela some da listagem (5 ms)
+
+  ● Integracao: upload -> adaptacao -> listagem -> exclusao › CT-I02 getProvasUser so lista provas que ja possuem arquivo adaptado
+
+    expect(received).not.toContain(expected) // indexOf
+
+    Expected value: not "obj1"
+    Received array:     ["obj2", "obj1"]
+
+      63 |     expect(ids).toContain(comAdaptacao);
+      64 |     // Comportamento atual (possivel defeito/decisao de projeto): prova sem adaptacao nao aparece
+    > 65 |     expect(ids).not.toContain(semAdaptacao);
+         |                     ^
+      66 |     expect(lista[0].arquivoAdaptadoUrl).toBe("https://fake.parse/files/com_adaptada.pdf");
+      67 |   });
+      68 |
+
+      at Object.toContain (__tests__/qa/provas.integration.test.js:65:21)
+
+FAIL __tests__/qa/downloadUtils.unit.test.js
+  gerarPDFAdaptado (unitario)
+    ✓ CT-U04 lanca erro quando nao ha provaId (7 ms)
+    ✓ CT-U04b lanca erro quando nao ha adaptedData
+    ✓ CT-U05 lanca erro quando a prova nao tem URL do arquivo original
+    ✓ CT-U06 lanca erro quando a lista de questoes adaptadas esta vazia (1 ms)
+    ✓ CT-U10 usa o formato alternativo questoes[].adaptada quando nao ha adaptedQuestions
+    ✓ CT-U11 lanca 'Erro ao gerar PDF.' quando a API responde com falha
+    ✓ CT-U12 nomeia o arquivo com base no arquivo selecionado (1 ms)
+    ✕ CT-U13 nome padrao (sem arquivo selecionado) deveria ser 'prova_adaptada.pdf'
+
+  ● gerarPDFAdaptado (unitario) › CT-U13 nome padrao (sem arquivo selecionado) deveria ser 'prova_adaptada.pdf'
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "prova_adaptada.pdf"
+    Received: "prova_adaptada_adaptada.pdf"
+
+      103 |       adaptedData: { adaptedQuestions: ["Q1"] },
+      104 |     });
+    > 105 |     expect(safeName).toBe("prova_adaptada.pdf");
+          |                      ^
+      106 |   });
+      107 | });
+      108 |
+
+      at Object.toBe (__tests__/qa/downloadUtils.unit.test.js:105:22)
 
 FAIL __tests__/qa/uploadFile.unit.test.js
   uploadFile (unitario)
-    ✓ CT-U01 remove acentos e troca espacos por underscore no nome (1 ms)
-    ✓ CT-U02 troca caracteres especiais por underscore e preserva a extensao (1 ms)
-    ✓ CT-U03 propaga o erro e exibe alert quando o save do arquivo falha (1 ms)
+    ✓ CT-U01 remove acentos e troca espacos por underscore no nome (2 ms)
+    ✓ CT-U02 troca caracteres especiais por underscore e preserva a extensao
+    ✓ CT-U03 propaga o erro e exibe alert quando o save do arquivo falha (2 ms)
     ✕ CT-U09 retorna o id da prova criada e grava titulo e url original (1 ms)
 
   ● uploadFile (unitario) › CT-U09 retorna o id da prova criada e grava titulo e url original
@@ -344,8 +505,16 @@ FAIL __tests__/qa/uploadFile.unit.test.js
 
       at Object.toHaveBeenCalledWith (__tests__/qa/uploadFile.unit.test.js:60:26)
 
-Test Suites: 6 failed, 1 passed, 7 total
-Tests:       7 failed, 29 passed, 36 total
+PASS __tests__/qa/parseFile.unit.test.js
+  POST /api/parse-file (unitario, mammoth mockado)
+    ✓ CT-U16 retorna 400 quando o texto extraido e curto demais (2 ms)
+    ✓ CT-U17 extrai questoes numeradas com ids q1, q2 (2 ms)
+    ✓ CT-U18 ignora itens numerados muito curtos (<= 10 caracteres) (1 ms)
+    ✓ CT-U19 remove a linha de cabecalho 'Instrucoes:' antes de extrair (1 ms)
+    ✓ CT-U20 GET retorna mensagem de API operacional (1 ms)
+
+Test Suites: 8 failed, 1 passed, 9 total
+Tests:       15 failed, 33 passed, 48 total
 Snapshots:   0 total
-Time:        2.223 s
+Time:        2.791 s, estimated 6 s
 Ran all test suites matching __tests__/qa.

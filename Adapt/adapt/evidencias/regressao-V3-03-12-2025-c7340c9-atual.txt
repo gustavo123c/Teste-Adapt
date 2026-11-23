@@ -1,24 +1,60 @@
-# Regressao - suite da equipe (__tests__/qa)
-# Commit: c7340c93d46745a01d8aa5fbda29a91ca4c1f65f
-# Data do commit: 2025-12-03 ajuste questoes e instruções
-# Executado em: 18/11/2026 15:24 | node v22.23.5 | npm 10.9.9
+]633;E;echo "# Regressao - suite da equipe (__tests__/qa, 48 casos: 34 unitarios + 14 de integracao)";18b9087a-0fd7-4bcb-aac2-13bf5f00e5fd]633;C# Regressao - suite da equipe (__tests__/qa, 48 casos: 34 unitarios + 14 de integracao)
+# Commit testado: c7340c93d46745a01d8aa5fbda29a91ca4c1f65f (03/12/2025), codigo identico no repositorio Teste-Adapt
+# Executado em: 23/11/2026 00:21 | GitHub Codespaces | node v24.22.2 | npm 11.19.1
 # Comando: npx jest --watchAll=false --verbose __tests__/qa
+
+FAIL __tests__/qa/generatePdf.unit.test.js
+  POST /api/generate-pdf - validacao da entrada
+    ✓ CT-U25 retorna 400 quando a lista de questoes adaptadas esta vazia (10 ms)
+    ✓ CT-U26 retorna 400 quando o campo adaptedQuestions nao e enviado (1 ms)
+    ✓ CT-U27 retorna 500 com a mensagem do erro quando o corpo nao e JSON valido (2 ms)
+  POST /api/generate-pdf - resposta e conteudo do documento
+    ✓ CT-U28 responde com o PDF gerado, Content-Type application/pdf e nome prova_adaptada.pdf (2 ms)
+    ✓ CT-U29 cria um titulo 'QUESTÃO n' por questao, na ordem recebida (2 ms)
+    ✓ CT-U30 usa cabecalho padrao sem metadata e preenche os campos quando ela e enviada (2 ms)
+    ✓ CT-U31 mostra aviso quando nao ha instrucoes e interpreta markdown quando ha (2 ms)
+    ✓ CT-U32 converte **negrito** e itens de lista dentro da questao (1 ms)
+    ✕ CT-U33 linha de questao iniciada por '# ' deveria continuar como texto, e nao virar titulo (2 ms)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U33 linha de questao iniciada por '# ' deveria continuar como texto, e nao virar titulo
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      126 |
+      127 |     const corpo = blocos("questionBody")[0].stack;
+    > 128 |     expect(corpo.some((b) => b.style === "mdH1")).toBe(false);
+          |                                                   ^
+      129 |     expect(JSON.stringify(corpo)).toContain("# de lados de um triângulo");
+      130 |   });
+      131 | });
+
+      at Object.toBe (__tests__/qa/generatePdf.unit.test.js:128:51)
+
+PASS __tests__/qa/fluxoCompleto.integration.test.js
+  Integracao: fluxo completo .docx -> upload -> PDF adaptado -> listagem
+    ✓ CT-I12 questoes extraidas do .docx viram um PDF real salvo na prova do usuario (729 ms)
+    ✓ CT-I13 falha na geracao do PDF e propagada e a prova nao fica com arquivo adaptado (4 ms)
+  Integracao: isolamento entre usuarios na exclusao
+    ✓ CT-I14 deleteProva nao confere o dono: user-2 consegue apagar a prova de user-1 (123 ms)
 
 PASS __tests__/qa/provas.integration.test.js
   Integracao: upload -> adaptacao -> listagem -> exclusao
-    ✓ CT-I01 gerarPDFAdaptado integra Parse + /api/generate-pdf e grava o PDF adaptado na prova (5 ms)
+    ✓ CT-I01 gerarPDFAdaptado integra Parse + /api/generate-pdf e grava o PDF adaptado na prova (3 ms)
     ✓ CT-I02 getProvasUser so lista provas que ja possuem arquivo adaptado (1 ms)
     ✓ CT-I03 provas de outro usuario nao aparecem na listagem (1 ms)
-    ✓ CT-I04 deleteProva remove a prova e ela some da listagem (7 ms)
+    ✓ CT-I04 deleteProva remove a prova e ela some da listagem (8 ms)
 
 FAIL __tests__/qa/downloadUtils.unit.test.js
   gerarPDFAdaptado (unitario)
-    ✓ CT-U04 lanca erro quando nao ha provaId (4 ms)
-    ✓ CT-U04b lanca erro quando nao ha adaptedData
+    ✓ CT-U04 lanca erro quando nao ha provaId (6 ms)
+    ✓ CT-U04b lanca erro quando nao ha adaptedData (1 ms)
     ✓ CT-U05 lanca erro quando a prova nao tem URL do arquivo original (1 ms)
-    ✓ CT-U06 lanca erro quando a lista de questoes adaptadas esta vazia (1 ms)
+    ✓ CT-U06 lanca erro quando a lista de questoes adaptadas esta vazia
     ✓ CT-U10 usa o formato alternativo questoes[].adaptada quando nao ha adaptedQuestions (1 ms)
-    ✓ CT-U11 lanca 'Erro ao gerar PDF.' quando a API responde com falha (1 ms)
+    ✓ CT-U11 lanca 'Erro ao gerar PDF.' quando a API responde com falha
     ✓ CT-U12 nomeia o arquivo com base no arquivo selecionado (1 ms)
     ✕ CT-U13 nome padrao (sem arquivo selecionado) deveria ser 'prova_adaptada.pdf' (2 ms)
 
@@ -41,18 +77,18 @@ FAIL __tests__/qa/downloadUtils.unit.test.js
 
 PASS __tests__/qa/baselineDiagnostico.unit.test.jsx
   Diagnostico DEF-01 a DEF-04 (UploadPage.download.test.jsx)
-    ✓ CT-U21: uploadFile falha quando save() devolve true, como no mock dos autores (3 ms)
-    ✓ CT-U22: uploadFile funciona quando save() devolve o proprio arquivo (comportamento real do Parse) (1 ms)
+    ✓ CT-U21: uploadFile falha quando save() devolve true, como no mock dos autores (4 ms)
+    ✓ CT-U22: uploadFile funciona quando save() devolve o proprio arquivo (comportamento real do Parse)
   Diagnostico DEF-05 (SalvasPage.test.jsx)
-    ✓ CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista (36 ms)
-    ✓ CT-U24: prova com arquivoAdaptadoUrl aparece na lista (36 ms)
+    ✓ CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista (45 ms)
+    ✓ CT-U24: prova com arquivoAdaptadoUrl aparece na lista (23 ms)
 
   console.error
     Error: Could not find file in options
-        at Object.openZip (/home/claude/regressao/c7340c9/adapt/node_modules/mammoth/lib/unzip.js:18:32)
-        at Object.extractRawText (/home/claude/regressao/c7340c9/adapt/node_modules/mammoth/lib/index.js:82:18)
-        at extractRawText (/home/claude/regressao/c7340c9/adapt/app/api/parse-docx/route.js:15:34)
-        at Object.<anonymous> (/home/claude/regressao/c7340c9/adapt/__tests__/qa/parseApi.integration.test.js:26:17)
+        at Object.openZip (/workspaces/Teste-Adapt/Adapt/adapt/node_modules/mammoth/lib/unzip.js:18:32)
+        at Object.extractRawText (/workspaces/Teste-Adapt/Adapt/adapt/node_modules/mammoth/lib/index.js:82:18)
+        at extractRawText (/workspaces/Teste-Adapt/Adapt/adapt/app/api/parse-docx/route.js:15:34)
+        at Object.<anonymous> (/workspaces/Teste-Adapt/Adapt/adapt/__tests__/qa/parseApi.integration.test.js:26:17)
 
       20 |     });
       21 |   } catch (err) {
@@ -67,12 +103,12 @@ PASS __tests__/qa/baselineDiagnostico.unit.test.jsx
 
 FAIL __tests__/qa/parseApi.integration.test.js
   Integracao: /api/parse-docx
-    ✕ CT-I05 extrai o texto de um .docx real (20 ms)
+    ✕ CT-I05 extrai o texto de um .docx real (16 ms)
     ✓ CT-I06 retorna 400 quando nenhum arquivo e enviado (1 ms)
   Integracao: /api/parse-file
-    ✓ CT-I07 detecta 2 questoes numeradas em um .docx real (14 ms)
+    ✓ CT-I07 detecta 2 questoes numeradas em um .docx real (5 ms)
     ✓ CT-I08 retorna 400 'Nenhuma questao detectada' para .docx sem numeracao (4 ms)
-    ✓ CT-I09 rejeita formato nao suportado (text/plain) com 400 (1 ms)
+    ✓ CT-I09 rejeita formato nao suportado (text/plain) com 400 (23 ms)
     ✕ CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500) (1 ms)
     ✓ CT-I11 GET informa que a API esta operacional
 
@@ -112,29 +148,29 @@ FAIL __tests__/qa/parseApi.integration.test.js
 
 PASS __tests__/qa/provasService.unit.test.js
   getProvasUser (unitario)
-    ✓ CT-U07 lanca erro quando nao ha usuario autenticado (3 ms)
-    ✓ CT-U14 filtra por usuario e mapeia os campos retornados (1 ms)
+    ✓ CT-U07 lanca erro quando nao ha usuario autenticado (9 ms)
+    ✓ CT-U14 filtra por usuario e mapeia os campos retornados (2 ms)
   deleteProva (unitario)
     ✓ CT-U08 busca a prova pelo id, chama destroy e retorna true (1 ms)
     ✓ CT-U15 propaga o erro quando a prova nao existe (1 ms)
 
 PASS __tests__/qa/parseFile.unit.test.js
   POST /api/parse-file (unitario, mammoth mockado)
-    ✓ CT-U16 retorna 400 quando o texto extraido e curto demais (1 ms)
-    ✓ CT-U17 extrai questoes numeradas com ids q1, q2 (2 ms)
-    ✓ CT-U18 ignora itens numerados muito curtos (<= 10 caracteres) (1 ms)
+    ✓ CT-U16 retorna 400 quando o texto extraido e curto demais (3 ms)
+    ✓ CT-U17 extrai questoes numeradas com ids q1, q2 (1 ms)
+    ✓ CT-U18 ignora itens numerados muito curtos (<= 10 caracteres) (2 ms)
     ✓ CT-U19 remove a linha de cabecalho 'Instrucoes:' antes de extrair (1 ms)
-    ✓ CT-U20 GET retorna mensagem de API operacional (1 ms)
+    ✓ CT-U20 GET retorna mensagem de API operacional
 
 PASS __tests__/qa/uploadFile.unit.test.js
   uploadFile (unitario)
     ✓ CT-U01 remove acentos e troca espacos por underscore no nome (1 ms)
     ✓ CT-U02 troca caracteres especiais por underscore e preserva a extensao
-    ✓ CT-U03 propaga o erro e exibe alert quando o save do arquivo falha (2 ms)
-    ✓ CT-U09 retorna o id da prova criada e grava titulo e url original
+    ✓ CT-U03 propaga o erro e exibe alert quando o save do arquivo falha (3 ms)
+    ✓ CT-U09 retorna o id da prova criada e grava titulo e url original (1 ms)
 
-Test Suites: 2 failed, 5 passed, 7 total
-Tests:       3 failed, 33 passed, 36 total
+Test Suites: 3 failed, 6 passed, 9 total
+Tests:       4 failed, 44 passed, 48 total
 Snapshots:   0 total
-Time:        1.105 s
+Time:        3.49 s
 Ran all test suites matching __tests__/qa.

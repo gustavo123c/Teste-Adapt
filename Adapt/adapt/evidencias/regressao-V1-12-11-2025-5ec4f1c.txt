@@ -1,48 +1,17 @@
-# Regressao - suite da equipe (__tests__/qa)
-# Commit: 5ec4f1c2825f9ad8b9563ae6346967ac62d40804
+# Regressao - suite da equipe (__tests__/qa, 48 casos: 34 unitarios + 14 de integracao)
+# Commit testado: 5ec4f1c2825f9ad8b9563ae6346967ac62d40804
 # Data do commit: 2025-11-12 Baixando
-# Executado em: 18/11/2026 15:24 | node v22.23.5 | npm 10.9.9
+# Testes copiados de: github.com/gustavo123c/Teste-Adapt @ 2a64048
+# Executado em: 22/11/2026 23:24 | node v22.23.5 | npm 10.9.9
 # Comando: npx jest --watchAll=false --verbose __tests__/qa
-
-FAIL __tests__/qa/provas.integration.test.js
-  ● Test suite failed to run
-
-    Cannot find module '../../app/dashboard/upload/downloadUtils' from '__tests__/qa/provas.integration.test.js'
-
-      15 |   default: require("../../test-utils/fakeParse").Parse,
-      16 | }));
-    > 17 |
-         | ^
-      18 | describe("Integracao: upload -> adaptacao -> listagem -> exclusao", () => {
-      19 |   beforeEach(() => {
-      20 |     reset();
-
-      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:863:11)
-      at Object.<anonymous> (__tests__/qa/provas.integration.test.js:17:24)
-
-FAIL __tests__/qa/downloadUtils.unit.test.js
-  ● Test suite failed to run
-
-    Cannot find module '../../app/dashboard/upload/downloadUtils' from '__tests__/qa/downloadUtils.unit.test.js'
-
-      21 |   },
-      22 | }));
-    > 23 |
-         | ^
-      24 | function makeProva(url = "https://fake/original.pdf") {
-      25 |   return {
-      26 |     get: jest.fn((k) => (k === "arquivoOriginalUrl" ? url : undefined)),
-
-      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:863:11)
-      at Object.<anonymous> (__tests__/qa/downloadUtils.unit.test.js:23:24)
 
 FAIL __tests__/qa/baselineDiagnostico.unit.test.jsx
   Diagnostico DEF-01 a DEF-04 (UploadPage.download.test.jsx)
-    ✓ CT-U21: uploadFile falha quando save() devolve true, como no mock dos autores (9 ms)
-    ✓ CT-U22: uploadFile funciona quando save() devolve o proprio arquivo (comportamento real do Parse) (8 ms)
+    ✓ CT-U21: uploadFile falha quando save() devolve true, como no mock dos autores (16 ms)
+    ✓ CT-U22: uploadFile funciona quando save() devolve o proprio arquivo (comportamento real do Parse) (3 ms)
   Diagnostico DEF-05 (SalvasPage.test.jsx)
-    ✕ CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista (1021 ms)
-    ✓ CT-U24: prova com arquivoAdaptadoUrl aparece na lista (19 ms)
+    ✕ CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista (1037 ms)
+    ✓ CT-U24: prova com arquivoAdaptadoUrl aparece na lista (10 ms)
 
   ● Diagnostico DEF-05 (SalvasPage.test.jsx) › CT-U23: prova sem arquivoAdaptadoUrl (igual ao mock dos autores) nao aparece na lista
 
@@ -199,6 +168,124 @@ FAIL __tests__/qa/baselineDiagnostico.unit.test.jsx
       at node_modules/@testing-library/dom/dist/query-helpers.js:86:33
       at Object.findByText (__tests__/qa/baselineDiagnostico.unit.test.jsx:78:25)
 
+FAIL __tests__/qa/generatePdf.unit.test.js
+  POST /api/generate-pdf - validacao da entrada
+    ✕ CT-U25 retorna 400 quando a lista de questoes adaptadas esta vazia (9 ms)
+    ✓ CT-U26 retorna 400 quando o campo adaptedQuestions nao e enviado (2 ms)
+    ✓ CT-U27 retorna 500 com a mensagem do erro quando o corpo nao e JSON valido (2 ms)
+  POST /api/generate-pdf - resposta e conteudo do documento
+    ✓ CT-U28 responde com o PDF gerado, Content-Type application/pdf e nome prova_adaptada.pdf (2 ms)
+    ✕ CT-U29 cria um titulo 'QUESTÃO n' por questao, na ordem recebida (4 ms)
+    ✕ CT-U30 usa cabecalho padrao sem metadata e preenche os campos quando ela e enviada (3 ms)
+    ✕ CT-U31 mostra aviso quando nao ha instrucoes e interpreta markdown quando ha (2 ms)
+    ✕ CT-U32 converte **negrito** e itens de lista dentro da questao (2 ms)
+    ✕ CT-U33 linha de questao iniciada por '# ' deveria continuar como texto, e nao virar titulo (7 ms)
+
+  ● POST /api/generate-pdf - validacao da entrada › CT-U25 retorna 400 quando a lista de questoes adaptadas esta vazia
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Nenhuma questão adaptada foi enviada."
+    Received: "adaptedQuestions são obrigatórios"
+
+      42 |     const res = await POST(postJson({ adaptedQuestions: [] }));
+      43 |     expect(res.status).toBe(400);
+    > 44 |     expect((await res.json()).error).toBe("Nenhuma questão adaptada foi enviada.");
+         |                                      ^
+      45 |     expect(mockCreatePdf).not.toHaveBeenCalled();
+      46 |   });
+      47 |
+
+      at Object.toBe (__tests__/qa/generatePdf.unit.test.js:44:38)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U29 cria um titulo 'QUESTÃO n' por questao, na ordem recebida
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 3
+    + Received  + 3
+
+      Array [
+    -   "QUESTÃO 1",
+    -   "QUESTÃO 2",
+    -   "QUESTÃO 3",
+    +   "Questão 1",
+    +   "Questão 2",
+    +   "Questão 3",
+      ]
+
+      73 |     await POST(postJson({ adaptedQuestions: ["Primeira", "Segunda", "Terceira"] }));
+      74 |
+    > 75 |     expect(blocos("questionTitle").map((b) => b.text)).toEqual([
+         |                                                        ^
+      76 |       "QUESTÃO 1",
+      77 |       "QUESTÃO 2",
+      78 |       "QUESTÃO 3",
+
+      at Object.toEqual (__tests__/qa/generatePdf.unit.test.js:75:56)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U30 usa cabecalho padrao sem metadata e preenche os campos quando ela e enviada
+
+    expect(received).toContain(expected) // indexOf
+
+    Expected substring: "UNICAP"
+    Received string:    "[{\"text\":\"PROVA ADAPTADA PARA ESTUDANTES COM TDAH\",\"style\":\"headerTitle\",\"alignment\":\"center\",\"margin\":[0,0,0,10]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Disciplina: Matemática\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Professor(a): Ana\",\"style\":\"headerField\"}]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Curso/Série: _________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Data: 01/12/2025\",\"style\":\"headerField\"}]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Aluno(a): ____________________________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Nota: _______\",\"style\":\"headerField\"}]},{\"text\":\"\",\"margin\":[0,10]},{\"canvas\":[{\"type\":\"line\",\"x1\":0,\"y1\":0,\"x2\":515,\"y2\":0,\"lineWidth\":1}]},{\"text\":\"\",\"margin\":[0,10]},{\"text\":\"INSTRUÇÕES:\",\"style\":\"sectionTitle\"},{\"ul\":[\"Leia cada questão com atenção.\",\"Responda todas as questões.\",\"Use caneta azul ou preta.\",\"Não é permitido consultar materiais.\",\"Não é permitido o uso de dispositivos eletrônicos.\"],\"style\":\"instructions\",\"margin\":[0,5,0,15]},{\"text\":\"Questão 1\",\"style\":\"questionTitle\"},{\"text\":\"Q1\",\"style\":\"questionBody\",\"margin\":[0,4,0,12]}]"
+
+       95 |     );
+       96 |     const comMetadata = JSON.stringify(docDefinition().content);
+    >  97 |     expect(comMetadata).toContain("UNICAP");
+          |                         ^
+       98 |     expect(comMetadata).toContain("Disciplina: Matemática");
+       99 |     expect(comMetadata).toContain("Professor(a): Ana");
+      100 |     expect(comMetadata).toContain("Data: 01/12/2025");
+
+      at Object.toContain (__tests__/qa/generatePdf.unit.test.js:97:25)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U31 mostra aviso quando nao ha instrucoes e interpreta markdown quando ha
+
+    expect(received).toContain(expected) // indexOf
+
+    Expected substring: "[Nenhuma instrução fornecida]"
+    Received string:    "[{\"text\":\"PROVA ADAPTADA PARA ESTUDANTES COM TDAH\",\"style\":\"headerTitle\",\"alignment\":\"center\",\"margin\":[0,0,0,10]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Disciplina: _________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Professor(a): _________\",\"style\":\"headerField\"}]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Curso/Série: _________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Data: ___/___/____\",\"style\":\"headerField\"}]},{\"columns\":[{\"width\":\"50%\",\"text\":\"Aluno(a): ____________________________\",\"style\":\"headerField\"},{\"width\":\"50%\",\"text\":\"Nota: _______\",\"style\":\"headerField\"}]},{\"text\":\"\",\"margin\":[0,10]},{\"canvas\":[{\"type\":\"line\",\"x1\":0,\"y1\":0,\"x2\":515,\"y2\":0,\"lineWidth\":1}]},{\"text\":\"\",\"margin\":[0,10]},{\"text\":\"INSTRUÇÕES:\",\"style\":\"sectionTitle\"},{\"ul\":[\"Leia cada questão com atenção.\",\"Responda todas as questões.\",\"Use caneta azul ou preta.\",\"Não é permitido consultar materiais.\",\"Não é permitido o uso de dispositivos eletrônicos.\"],\"style\":\"instructions\",\"margin\":[0,5,0,15]},{\"text\":\"Questão 1\",\"style\":\"questionTitle\"},{\"text\":\"Q1\",\"style\":\"questionBody\",\"margin\":[0,4,0,12]}]"
+
+      103 |   test("CT-U31 mostra aviso quando nao ha instrucoes e interpreta markdown quando ha", async () => {
+      104 |     await POST(postJson({ adaptedQuestions: ["Q1"] }));
+    > 105 |     expect(JSON.stringify(docDefinition().content)).toContain("[Nenhuma instrução fornecida]");
+          |                                                     ^
+      106 |
+      107 |     await POST(
+      108 |       postJson({ adaptedQuestions: ["Q1"], instrucoesOriginais: "# Atenção\n- Use caneta azul" })
+
+      at Object.toContain (__tests__/qa/generatePdf.unit.test.js:105:53)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U32 converte **negrito** e itens de lista dentro da questao
+
+    TypeError: Cannot read properties of undefined (reading '0')
+
+      117 |
+      118 |     const corpo = blocos("questionBody")[0].stack;
+    > 119 |     expect(corpo[0].text).toEqual([{ text: "Calcule " }, { text: "2 + 2", bold: true }]);
+          |                 ^
+      120 |     expect(corpo[1]).toMatchObject({ ul: ["opção A"], style: "mdList" });
+      121 |     expect(corpo[2]).toMatchObject({ ul: ["opção B"], style: "mdList" });
+      122 |   });
+
+      at Object.<anonymous> (__tests__/qa/generatePdf.unit.test.js:119:17)
+
+  ● POST /api/generate-pdf - resposta e conteudo do documento › CT-U33 linha de questao iniciada por '# ' deveria continuar como texto, e nao virar titulo
+
+    TypeError: Cannot read properties of undefined (reading 'some')
+
+      126 |
+      127 |     const corpo = blocos("questionBody")[0].stack;
+    > 128 |     expect(corpo.some((b) => b.style === "mdH1")).toBe(false);
+          |                  ^
+      129 |     expect(JSON.stringify(corpo)).toContain("# de lados de um triângulo");
+      130 |   });
+      131 | });
+
+      at Object.some (__tests__/qa/generatePdf.unit.test.js:128:18)
+
   console.error
     Error: Could not find file in options
         at Object.openZip (/home/claude/regressao/5ec4f1c/adapt/node_modules/mammoth/lib/unzip.js:18:32)
@@ -219,14 +306,14 @@ FAIL __tests__/qa/baselineDiagnostico.unit.test.jsx
 
 FAIL __tests__/qa/parseApi.integration.test.js
   Integracao: /api/parse-docx
-    ✕ CT-I05 extrai o texto de um .docx real (25 ms)
+    ✕ CT-I05 extrai o texto de um .docx real (22 ms)
     ✓ CT-I06 retorna 400 quando nenhum arquivo e enviado (1 ms)
   Integracao: /api/parse-file
     ✓ CT-I07 detecta 2 questoes numeradas em um .docx real (15 ms)
     ✓ CT-I08 retorna 400 'Nenhuma questao detectada' para .docx sem numeracao (3 ms)
-    ✓ CT-I09 rejeita formato nao suportado (text/plain) com 400 (1 ms)
+    ✓ CT-I09 rejeita formato nao suportado (text/plain) com 400 (2 ms)
     ✕ CT-I10 requisicao sem arquivo deveria retornar 400 (e nao 500) (1 ms)
-    ✓ CT-I11 GET informa que a API esta operacional (1 ms)
+    ✓ CT-I11 GET informa que a API esta operacional
 
   ● Integracao: /api/parse-docx › CT-I05 extrai o texto de um .docx real
 
@@ -265,10 +352,10 @@ FAIL __tests__/qa/parseApi.integration.test.js
 FAIL __tests__/qa/provasService.unit.test.js
   getProvasUser (unitario)
     ✓ CT-U07 lanca erro quando nao ha usuario autenticado (3 ms)
-    ✕ CT-U14 filtra por usuario e mapeia os campos retornados (1 ms)
+    ✕ CT-U14 filtra por usuario e mapeia os campos retornados
   deleteProva (unitario)
-    ✓ CT-U08 busca a prova pelo id, chama destroy e retorna true (1 ms)
-    ✓ CT-U15 propaga o erro quando a prova nao existe
+    ✓ CT-U08 busca a prova pelo id, chama destroy e retorna true
+    ✓ CT-U15 propaga o erro quando a prova nao existe (1 ms)
 
   ● getProvasUser (unitario) › CT-U14 filtra por usuario e mapeia os campos retornados
 
@@ -287,20 +374,12 @@ FAIL __tests__/qa/provasService.unit.test.js
       at map (app/back4app/provas/getProvasUser.js:15:18)
       at Object.<anonymous> (__tests__/qa/provasService.unit.test.js:56:20)
 
-PASS __tests__/qa/parseFile.unit.test.js
-  POST /api/parse-file (unitario, mammoth mockado)
-    ✓ CT-U16 retorna 400 quando o texto extraido e curto demais (1 ms)
-    ✓ CT-U17 extrai questoes numeradas com ids q1, q2 (1 ms)
-    ✓ CT-U18 ignora itens numerados muito curtos (<= 10 caracteres) (2 ms)
-    ✓ CT-U19 remove a linha de cabecalho 'Instrucoes:' antes de extrair (1 ms)
-    ✓ CT-U20 GET retorna mensagem de API operacional (1 ms)
-
 FAIL __tests__/qa/uploadFile.unit.test.js
   uploadFile (unitario)
     ✓ CT-U01 remove acentos e troca espacos por underscore no nome (2 ms)
-    ✓ CT-U02 troca caracteres especiais por underscore e preserva a extensao (1 ms)
-    ✓ CT-U03 propaga o erro e exibe alert quando o save do arquivo falha (1 ms)
-    ✕ CT-U09 retorna o id da prova criada e grava titulo e url original (1 ms)
+    ✓ CT-U02 troca caracteres especiais por underscore e preserva a extensao
+    ✓ CT-U03 propaga o erro e exibe alert quando o save do arquivo falha (2 ms)
+    ✕ CT-U09 retorna o id da prova criada e grava titulo e url original (2 ms)
 
   ● uploadFile (unitario) › CT-U09 retorna o id da prova criada e grava titulo e url original
 
@@ -324,8 +403,64 @@ FAIL __tests__/qa/uploadFile.unit.test.js
 
       at Object.toHaveBeenCalledWith (__tests__/qa/uploadFile.unit.test.js:60:26)
 
-Test Suites: 6 failed, 1 passed, 7 total
-Tests:       5 failed, 19 passed, 24 total
+PASS __tests__/qa/parseFile.unit.test.js
+  POST /api/parse-file (unitario, mammoth mockado)
+    ✓ CT-U16 retorna 400 quando o texto extraido e curto demais (2 ms)
+    ✓ CT-U17 extrai questoes numeradas com ids q1, q2 (1 ms)
+    ✓ CT-U18 ignora itens numerados muito curtos (<= 10 caracteres) (1 ms)
+    ✓ CT-U19 remove a linha de cabecalho 'Instrucoes:' antes de extrair (1 ms)
+    ✓ CT-U20 GET retorna mensagem de API operacional
+
+FAIL __tests__/qa/provas.integration.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../app/dashboard/upload/downloadUtils' from '__tests__/qa/provas.integration.test.js'
+
+      15 |   default: require("../../test-utils/fakeParse").Parse,
+      16 | }));
+    > 17 |
+         | ^
+      18 | describe("Integracao: upload -> adaptacao -> listagem -> exclusao", () => {
+      19 |   beforeEach(() => {
+      20 |     reset();
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:863:11)
+      at Object.<anonymous> (__tests__/qa/provas.integration.test.js:17:24)
+
+FAIL __tests__/qa/fluxoCompleto.integration.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../app/dashboard/upload/downloadUtils' from '__tests__/qa/fluxoCompleto.integration.test.js'
+
+      15 | jest.mock("../../app/back4app/parseConfig", () => ({
+      16 |   __esModule: true,
+    > 17 |   default: require("../../test-utils/fakeParse").Parse,
+         |                        ^
+      18 | }));
+      19 |
+      20 | jest.setTimeout(30000);
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:863:11)
+      at Object.<anonymous> (__tests__/qa/fluxoCompleto.integration.test.js:17:24)
+
+FAIL __tests__/qa/downloadUtils.unit.test.js
+  ● Test suite failed to run
+
+    Cannot find module '../../app/dashboard/upload/downloadUtils' from '__tests__/qa/downloadUtils.unit.test.js'
+
+      21 |   },
+      22 | }));
+    > 23 |
+         | ^
+      24 | function makeProva(url = "https://fake/original.pdf") {
+      25 |   return {
+      26 |     get: jest.fn((k) => (k === "arquivoOriginalUrl" ? url : undefined)),
+
+      at Resolver._throwModNotFoundError (node_modules/jest-resolve/build/index.js:863:11)
+      at Object.<anonymous> (__tests__/qa/downloadUtils.unit.test.js:23:24)
+
+Test Suites: 8 failed, 1 passed, 9 total
+Tests:       11 failed, 22 passed, 33 total
 Snapshots:   0 total
-Time:        2.117 s
+Time:        2.261 s, estimated 6 s
 Ran all test suites matching __tests__/qa.
